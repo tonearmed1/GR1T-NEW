@@ -9,7 +9,7 @@ import { COUNTRIES } from "@/constants/country";
 // import { SingleValue } from "react-select";
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [showSelector, setShowSelector] = useState(false);
 
   const openSelector = useCallback(() => setShowSelector(true), []);
