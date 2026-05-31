@@ -83,6 +83,7 @@ const Footer = () => {
   }, [email, loading]);
   // Navigation links data structure with translations
   // 3 link columns + contact column = 4 sections, evenly distributed at md+.
+  // Order (per user preference): Bikes → Work With Us → About Us → Contact.
   // Privacy / Terms / Cookie Policy live exclusively in the bottom legal strip
   // (no longer a duplicate "Legal" column up here).
   const footerLinks = [
@@ -99,6 +100,14 @@ const Footer = () => {
       ],
     },
     {
+      title: t("footer.workWithUs"),
+      links: [
+        { label: t("corporate.distributors.link"), href: "/corporate/distributors" },
+        { label: t("corporate.investors.link"), href: "/corporate/investors" },
+        { label: t("corporate.fleetSales.link"), href: "/corporate/fleet-sales" },
+      ],
+    },
+    {
       title: t("nav.about"),
       links: [
         { label: t("nav.quality"), href: "/quality" },
@@ -108,14 +117,6 @@ const Footer = () => {
         { label: t("nav.sustainability"), href: "/quality/sustainablity" },
         { label: t("home.faq.title"), href: "/faqs" },
         { label: t("nav.contact"), href: "/contact" },
-      ],
-    },
-    {
-      title: t("footer.workWithUs"),
-      links: [
-        { label: t("corporate.distributors.link"), href: "/corporate/distributors" },
-        { label: t("corporate.investors.link"), href: "/corporate/investors" },
-        { label: t("corporate.fleetSales.link"), href: "/corporate/fleet-sales" },
       ],
     },
   ];
@@ -165,12 +166,14 @@ const Footer = () => {
           <div className="w-full h-px bg-white my-8"></div>
         </div>
 
-        {/* Footer columns — 3 link cols + contact, evenly distributed.
-            Mobile stacks 1-up; sm shows 2-up; md+ shows all 4 in one row at 25% each. */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 mb-12">
-          {/* Navigation Link Columns */}
+        {/* Footer columns — 3 link cols + contact.
+            Mobile: 1-up. sm: 2-up grid. md/lg: 4 equal cols (one each, contact addresses stacked).
+            xl (widescreen): switch to a 12-col grid so the contact section can take col-span-6,
+            making room for addresses to sit side-by-side. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-12 gap-x-6 gap-y-8 mb-12">
+          {/* Navigation Link Columns — at xl, each takes 2/12 (~16%), three of them = 6/12 */}
           {footerLinks.map((column, index) => (
-            <div key={index}>
+            <div key={index} className="xl:col-span-2">
               <h3 className="font-medium mb-4 text-white">{column.title}</h3>
               <ul className="space-y-2 text-sm text-white">
                 {column.links.map((link, linkIndex) => (
@@ -210,11 +213,11 @@ const Footer = () => {
             </div>
           </div> */}
 
-          {/* Contact Info — one column equal to the link cols. Addresses stack vertically
-              inside so each one gets the full column width — phone numbers always on one line. */}
-          <div>
+          {/* Contact Info — equal to link cols at md/lg with addresses stacked,
+              wider (6/12) at xl with addresses side-by-side. */}
+          <div className="xl:col-span-6">
             <h3 className="font-medium mb-4">{t("contact.title")}</h3>
-            <div className="space-y-4">
+            <div className="space-y-4 xl:space-y-0 xl:grid xl:grid-cols-3 xl:gap-4">
               <address className="not-italic text-sm text-white space-y-1">
                 <p>GR1T Motorcycles GmbH</p>
                 <p>Piazza Gae Aulenti 1, Torre B</p>
