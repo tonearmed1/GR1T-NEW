@@ -1,0 +1,381 @@
+#silktide-wrapper {
+  --focus: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 0 0 4px rgba(0, 0, 0, 0.35);
+  --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
+  --fontFamily: Helvetica Neue, Segoe UI, Arial, sans-serif;
+  --primaryColor: #f57423;
+  --backgroundColor: #ffffff;
+  --textColor: #3c3c3c;
+  --backdropBackgroundColor: #00000066;
+  --backdropBackgroundBlur: 0px;
+  --cookieIconColor: #ffffff;
+  --cookieIconBackgroundColor: #3c3c3c;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#silktide-wrapper a {
+  all: unset;
+  display: inline-block;
+  color: var(--primaryColor);
+  text-decoration: underline;
+}
+#silktide-wrapper a:hover {
+  cursor: pointer;
+  color: var(--textColor);
+}
+#silktide-wrapper .st-button {
+  color: var(--backgroundColor);
+  background-color: var(--primaryColor);
+  border: 2px solid var(--primaryColor);
+  padding: 10px 20px;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#silktide-wrapper .st-button--primary:hover {
+  background-color: var(--backgroundColor);
+  color: var(--primaryColor);
+}
+#silktide-wrapper .st-button--secondary {
+  background-color: var(--backgroundColor);
+  color: var(--primaryColor);
+}
+#silktide-wrapper .st-button--secondary:hover {
+  background-color: var(--primaryColor);
+  color: var(--backgroundColor);
+}
+#silktide-wrapper a:focus,
+#silktide-wrapper #silktide-banner button:focus,
+#silktide-wrapper #silktide-modal button:focus,
+#silktide-wrapper #silktide-cookie-icon:focus {
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: 5px;
+}
+#silktide-wrapper #silktide-cookie-icon:focus {
+  border-radius: 50%;
+}
+#silktide-backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: auto;
+  display: none;
+  background: var(--backdropBackgroundColor);
+  backdrop-filter: blur(var(--backdropBackgroundBlur));
+  z-index: 99998;
+}
+#silktide-banner {
+  font-family: var(--fontFamily);
+  color: var(--textColor);
+  background-color: var(--backgroundColor);
+  box-sizing: border-box;
+  padding: 24px;
+  border-radius: 8px;
+  pointer-events: auto;
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: auto;
+  width: 600px;
+  overflow: auto;
+  max-width: calc(100% - 32px);
+  max-height: calc(100vh - 32px);
+  transform: translate(0, -20px);
+  opacity: 0;
+  animation: silktide-slideInDown 350ms ease-out forwards;
+  animation-delay: 0.3s;
+  box-shadow: var(--boxShadow);
+  z-index: 100000;
+}
+#silktide-banner.center {
+  top: 50%;
+  left: 50%;
+  bottom: auto;
+  right: auto;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  animation: silktide-slideInDown-center 350ms ease-out forwards;
+}
+#silktide-banner.bottomLeft {
+  bottom: 16px;
+  left: 16px;
+  position: fixed;
+}
+#silktide-banner.bottomCenter {
+  bottom: 16px;
+  left: 50%;
+  position: fixed;
+  transform: translate(-50%, -20px);
+  animation: silktide-slideInDown-bottomCenter 350ms ease-out forwards;
+}
+#silktide-banner .preferences {
+  display: flex;
+  gap: 5px;
+  border: none;
+  padding: 12px 0;
+  background-color: transparent;
+  color: var(--primaryColor);
+  cursor: pointer;
+  font-size: 16px;
+}
+#silktide-banner .preferences span {
+  display: block;
+  white-space: nowrap;
+  text-decoration: underline;
+}
+#silktide-banner .preferences span:hover {
+  color: var(--textColor);
+}
+#silktide-banner .preferences:after {
+  display: block;
+  content: ">";
+  text-decoration: none;
+}
+#silktide-banner p {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0 0 12px;
+}
+#silktide-banner .actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+#silktide-banner .actions-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+#silktide-modal {
+  font-family: var(--fontFamily);
+  color: var(--textColor);
+  background-color: var(--backgroundColor);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 720px;
+  width: calc(100% - 32px);
+  max-height: calc(100vh - 64px);
+  overflow: auto;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: var(--boxShadow);
+  display: none;
+  pointer-events: auto;
+  z-index: 100001;
+  display: flex;
+  flex-direction: column;
+}
+#silktide-modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+  position: relative;
+}
+#silktide-modal .modal-close svg path {
+  fill: currentColor;
+}
+#silktide-modal h1 {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+  margin: 0;
+}
+#silktide-modal .modal-close {
+  border: none;
+  background: transparent;
+  color: var(--textColor);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+#silktide-modal p {
+  font-size: 15px;
+  line-height: 22px;
+  margin: 0 0 12px;
+}
+#silktide-modal > p {
+  text-align: center;
+}
+#silktide-modal #cookie-preferences {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+#silktide-modal fieldset {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 0;
+  background: #fff;
+}
+#silktide-modal legend {
+  font-weight: 700;
+  padding: 0 6px;
+}
+#silktide-modal .cookie-type-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+#silktide-modal .cookie-type-content .switch {
+  align-self: flex-start;
+}
+#silktide-modal footer {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 12px;
+  flex-wrap: nowrap;
+  margin-top: auto;
+}
+#silktide-modal footer .st-button {
+  width: 100%;
+  display: block;
+}
+.silktide-logo {
+  opacity: 0.8;
+  font-size: 12px;
+}
+.silktide-logo:hover {
+  opacity: 1;
+}
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch__pill {
+  width: 44px;
+  height: 24px;
+  background: #d1d5db;
+  border-radius: 9999px;
+  position: relative;
+  display: inline-block;
+  transition: background 0.2s ease;
+}
+.switch__dot {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 9999px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+.switch__off,
+.switch__on {
+  display: none;
+}
+.switch input:checked + .switch__pill {
+  background: var(--primaryColor);
+}
+.switch input:checked + .switch__pill + .switch__dot {
+  transform: translateX(20px);
+}
+#silktide-modal .st-button {
+  min-width: 160px;
+}
+#silktide-cookie-icon {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 56px;
+  height: 56px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--cookieIconBackgroundColor);
+  color: var(--cookieIconColor);
+  border-radius: 50%;
+  box-shadow: var(--boxShadow);
+  pointer-events: auto;
+  cursor: pointer;
+}
+.bottomLeft#silktide-cookie-icon,
+#silktide-cookie-icon.bottomLeft {
+  left: 16px;
+  right: auto;
+}
+.topLeft#silktide-cookie-icon,
+#silktide-cookie-icon.topLeft {
+  top: 16px;
+  bottom: auto;
+  left: 16px;
+  right: auto;
+}
+.topRight#silktide-cookie-icon,
+#silktide-cookie-icon.topRight {
+  top: 16px;
+  bottom: auto;
+  right: 16px;
+  left: auto;
+}
+.silktide-logo {
+  display: inline-flex;
+  align-items: center;
+}
+@keyframes silktide-slideInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes silktide-slideInDown-center {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+@keyframes silktide-slideInDown-bottomCenter {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
