@@ -31,28 +31,26 @@ export default function StillStuckCTA() {
   const contactHref = lang === "it" ? "/it/contact" : "/contact";
 
   return (
-    <section className="bg-white py-12 sm:py-16">
+    <section className="bg-[#1a1a1a] py-12 sm:py-16">
       <div className="container mx-auto px-4 md:px-0 max-w-3xl text-center">
-        <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8 sm:p-10">
-          <h2 className="text-2xl sm:text-3xl font-britti font-bold text-black">{c.heading}</h2>
-          <p className="mt-3 text-base text-gray-600">{c.body}</p>
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href={contactHref}
-              className="inline-flex items-center gap-2 rounded-full bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 text-sm font-semibold transition-colors"
-            >
-              {c.contact}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-            <a
-              href={`mailto:${c.email}`}
-              className="inline-flex items-center gap-2 rounded-full border border-black text-black hover:bg-black hover:text-white px-6 py-3 text-sm font-semibold transition-colors"
-            >
-              {c.email}
-            </a>
-          </div>
+        <h2 className="text-2xl sm:text-3xl font-britti font-bold text-white">{c.heading}</h2>
+        <p className="mt-3 text-base text-gray-300">{c.body}</p>
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Link
+            href={contactHref}
+            className="inline-flex items-center gap-2 rounded-full bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 text-sm font-semibold transition-colors"
+          >
+            {c.contact}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+          <a
+            href={`mailto:${c.email}`}
+            className="inline-flex items-center gap-2 rounded-full border border-white/30 text-white hover:bg-white hover:text-black hover:border-white px-6 py-3 text-sm font-semibold transition-colors"
+          >
+            {c.email}
+          </a>
         </div>
       </div>
     </section>

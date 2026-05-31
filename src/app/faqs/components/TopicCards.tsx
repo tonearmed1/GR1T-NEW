@@ -88,8 +88,7 @@ export default function TopicCards() {
           {TOPICS.map((topic) => (
             <li key={topic.slug}>
               <Link
-                href={`/faqs#category-${topic.slug}`}
-                scroll={false}
+                href={`/faqs/${topic.slug}`}
                 className="group block h-full rounded-xl border border-gray-200 bg-white hover:border-orange-500 hover:shadow-md transition-all p-5"
               >
                 <div

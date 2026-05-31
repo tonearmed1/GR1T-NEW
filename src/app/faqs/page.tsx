@@ -2,9 +2,8 @@ import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import Hero from "./components/hero";
 import SearchBar from "./components/SearchBar";
-import TopicCards from "./components/TopicCards";
+import HelpCenterContent from "./components/HelpCenterContent";
 import StillStuckCTA from "./components/StillStuckCTA";
-import FAQBrowser from "@/components/FAQBrowser";
 import FAQPageSchema from "./FAQPageSchema";
 
 const BASE = "https://www.gritmotorcycles.com";
@@ -12,7 +11,7 @@ const BASE = "https://www.gritmotorcycles.com";
 export const metadata: Metadata = {
   title: "Help Center | GR1T Motorcycles",
   description:
-    "Answers about the GR1T G1S Street and G1X Scrambler — specs, battery, charging, licence requirements, reservations, delivery, warranty and more. Search or browse by topic.",
+    "Browse answers about the GR1T G1S Street and G1X Scrambler — specs, battery, charging, licence requirements, reservations, delivery, warranty. Search or pick a topic.",
   alternates: {
     canonical: `${BASE}/faqs`,
     languages: {
@@ -31,27 +30,23 @@ export const metadata: Metadata = {
 export default function FaqsPage() {
   return (
     <>
-      {/* JSON-LD FAQPage schema for SEO — emits all questions + plain-text answers */}
+      {/* Full FAQPage schema lives on the root — covers all 23 questions across categories.
+          Each category page also emits its own schema for that subset. */}
       <FAQPageSchema />
 
-      {/* Help Center structure:
-            Hero          → page title (left-aligned to match content)
-            SearchBar     → above topic cards, writes URL ?q= to share state with FAQBrowser
-            TopicCards    → 5 clickable cards, deep-link to FAQBrowser categories via URL hash
-            FAQBrowser    → accordion only (pills removed; cards do the category job).
-                            Reads ?q + #category- from URL. Light theme.
-            StillStuckCTA → contact fallback for the visitor we didn't answer
-          Suspense wrapper is required for useSearchParams in client children. */}
+      {/* Help Center landing structure (DAB / Maeving pattern):
+            Hero            → page title (left-aligned)
+            SearchBar       → above content, writes URL ?q= for cross-category search
+            HelpCenterContent → topic cards by default; search results when ?q= is active
+            StillStuckCTA   → dark contact fallback band
+          Long category Q&A lists now live at /faqs/[category] (motorcycles, battery, etc.) */}
       <Hero />
       <Suspense fallback={null}>
         <SearchBar />
       </Suspense>
-      <TopicCards />
-      <section id="faqs">
-        <Suspense fallback={null}>
-          <FAQBrowser />
-        </Suspense>
-      </section>
+      <Suspense fallback={null}>
+        <HelpCenterContent />
+      </Suspense>
       <StillStuckCTA />
     </>
   );
