@@ -1,6 +1,7 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
 import Hero from "@/components/home/hero";
+import PressStrip from "@/components/home/PressStrip";
 import BikesSection from "@/components/home/bikesSection";
 import GallerySection from "@/components/home/gallery";
 import GalleryTwoSection from "@/components/reusable/gallery2";
@@ -29,6 +30,7 @@ export default function Home() {
   return (
     <div className="w-full">
       <Hero />
+      <PressStrip />
       <BikesSection />
       <GallerySection />
       {/* <CTASection /> */}
