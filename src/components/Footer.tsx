@@ -82,15 +82,20 @@ const Footer = () => {
     }
   }, [email, loading]);
   // Navigation links data structure with translations
+  // 3 link columns + contact column = 4 sections, evenly distributed at md+.
+  // Privacy / Terms / Cookie Policy live exclusively in the bottom legal strip
+  // (no longer a duplicate "Legal" column up here).
   const footerLinks = [
     {
-      title: t("nav.home"),
+      // Bikes — product-related links including Warranty + Reservation Terms,
+      // which belong with the bike-buyer journey (moved from the bottom legal strip).
+      title: language === "it" ? "Moto" : "Bikes",
       links: [
         { label: "G1S Street", href: "/G1S" },
         { label: "G1X Scrambler", href: "/G1X" },
         { label: t("nav.tech"), href: "/tech" },
-        // { label: t("nav.foundersCircle"), href: "/founders-circle" },
-        // { label: "FAQs", href: "/faqs" },
+        { label: t("footer.warranty"), href: "/quality/warranty" },
+        { label: t("footer.reservationTerms"), href: "/legal/reservation-terms" },
       ],
     },
     {
@@ -101,7 +106,6 @@ const Footer = () => {
         { label: t("nav.events"), href: "/corporate/conferences" },
         { label: t("nav.corporate"), href: "/corporate" },
         { label: t("nav.sustainability"), href: "/quality/sustainablity" },
-        // Help Center / FAQ — added per FAQ structure overhaul (May 2026).
         { label: t("home.faq.title"), href: "/faqs" },
         { label: t("nav.contact"), href: "/contact" },
       ],
@@ -112,15 +116,6 @@ const Footer = () => {
         { label: t("corporate.distributors.link"), href: "/corporate/distributors" },
         { label: t("corporate.investors.link"), href: "/corporate/investors" },
         { label: t("corporate.fleetSales.link"), href: "/corporate/fleet-sales" },
-      ],
-    },
-    {
-      title: t("footer.legal"),
-      links: [
-        { label: t("common.privacyPolicy"), href: "/legal/privacy-policy" },
-        { label: t("common.termsOfUse"), href: "/legal/terms-of-use" },
-        { label: t("footer.warranty"), href: "/quality/warranty" },
-        { label: t("footer.reservationTerms"), href: "/legal/reservation-terms" },
       ],
     },
   ];
@@ -170,14 +165,12 @@ const Footer = () => {
           <div className="w-full h-px bg-white my-8"></div>
         </div>
 
-        {/* Navigation Columns — 12-col grid that rebalances at large screens so the contact
-            block has enough room for full-width phone numbers without wrapping.
-            md (tablet): link cols span 2, contact spans 4 → labels readable, phones still tight.
-            lg+ (desktop): link cols span 1, contact spans 8 → phones fit on one line. */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-3 gap-y-8 mb-12">
+        {/* Footer columns — 3 link cols + contact, evenly distributed.
+            Mobile stacks 1-up; sm shows 2-up; md+ shows all 4 in one row at 25% each. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 mb-12">
           {/* Navigation Link Columns */}
           {footerLinks.map((column, index) => (
-            <div key={index} className="md:col-span-2 lg:col-span-1">
+            <div key={index}>
               <h3 className="font-medium mb-4 text-white">{column.title}</h3>
               <ul className="space-y-2 text-sm text-white">
                 {column.links.map((link, linkIndex) => (
@@ -217,11 +210,11 @@ const Footer = () => {
             </div>
           </div> */}
 
-          {/* Contact Info — md spans 4 (matches link cols), lg+ spans 8 so the three address
-              blocks have enough room for phone numbers without wrapping. */}
-          <div className="md:col-span-4 lg:col-span-8">
+          {/* Contact Info — one column equal to the link cols. Addresses stack vertically
+              inside so each one gets the full column width — phone numbers always on one line. */}
+          <div>
             <h3 className="font-medium mb-4">{t("contact.title")}</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="space-y-4">
               <address className="not-italic text-sm text-white space-y-1">
                 <p>GR1T Motorcycles GmbH</p>
                 <p>Piazza Gae Aulenti 1, Torre B</p>
@@ -258,18 +251,17 @@ const Footer = () => {
           <p>
             © {new Date().getFullYear()} GR1T. {t("footer.rights")}
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          {/* Bottom strip — purely site-wide legal/compliance links.
+              Warranty + Reservation Terms moved up into the "Bikes" column. */}
+          <div className="flex flex-wrap gap-x-6 gap-y-2 mt-4 md:mt-0">
             <Link href="/legal/privacy-policy" className="hover:text-white">
               {t("common.privacyPolicy")}
             </Link>
             <Link href="/legal/terms-of-use" className="hover:text-white">
               {t("common.termsOfUse")}
             </Link>
-            <Link href="/quality/warranty" className="hover:text-white">
-              {t("footer.warranty")}
-            </Link>
-            <Link href="/legal/reservation-terms" className="hover:text-white">
-              {t("footer.reservationTerms")}
+            <Link href="/legal/cookie-policy" className="hover:text-white">
+              {language === "it" ? "Cookie Policy" : "Cookie Policy"}
             </Link>
           </div>
         </div>
