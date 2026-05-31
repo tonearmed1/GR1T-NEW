@@ -168,11 +168,11 @@ const Footer = () => {
           <div className="w-full h-px bg-white my-8"></div>
         </div>
 
-        {/* Navigation Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-7 gap-4 mb-12">
+        {/* Navigation Columns — 12-col grid: 4 link cols × col-span-2 (= 8) + contact col-span-4 (right edge) */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-4 gap-y-8 mb-12">
           {/* Navigation Link Columns */}
           {footerLinks.map((column, index) => (
-            <div key={index}>
+            <div key={index} className="md:col-span-2">
               <h3 className="font-medium mb-4 text-white">{column.title}</h3>
               <ul className="space-y-2 text-sm text-white">
                 {column.links.map((link, linkIndex) => (
@@ -212,10 +212,10 @@ const Footer = () => {
             </div>
           </div> */}
 
-          {/* Contact Info */}
-          <div className="col-span-2">
+          {/* Contact Info — spans 4 of 12 cols so addresses fill to the right edge of the divider */}
+          <div className="md:col-span-4">
             <h3 className="font-medium mb-4">{t("contact.title")}</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               <address className="not-italic text-sm text-white space-y-1">
                 <p>GR1T Motorcycles GmbH</p>
                 <p>Piazza Gae Aulenti 1, Torre B</p>
