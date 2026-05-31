@@ -101,6 +101,8 @@ const Footer = () => {
         { label: t("nav.events"), href: "/corporate/conferences" },
         { label: t("nav.corporate"), href: "/corporate" },
         { label: t("nav.sustainability"), href: "/quality/sustainablity" },
+        // Help Center / FAQ — added per FAQ structure overhaul (May 2026).
+        { label: t("home.faq.title"), href: "/faqs" },
         { label: t("nav.contact"), href: "/contact" },
       ],
     },

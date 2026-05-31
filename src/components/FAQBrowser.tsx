@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import {
@@ -8,6 +8,14 @@ import {
   FAQCategory,
   useFAQs,
 } from "@/data/faqs";
+
+const VALID_CATEGORIES: ReadonlyArray<FAQCategory> = [
+  "motorcycles",
+  "battery",
+  "licence",
+  "buying",
+  "warranty",
+];
 
 /**
  * FAQBrowser — the full FAQ experience: search + category pills + accordion.
@@ -50,6 +58,19 @@ export default function FAQBrowser() {
   const [query, setQuery] = useState("");
   const [tab, setTab] = useState<Tab>("all");
   const [openId, setOpenId] = useState<string | null>(null);
+
+  // Deep-linking: read URL hash on mount (e.g. /faqs#category-battery)
+  // so the topic cards on the help-center hero can pre-select a category.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash.replace(/^#/, "");
+    const m = hash.match(/^category-(.+)$/);
+    if (!m) return;
+    const cat = m[1];
+    if ((VALID_CATEGORIES as readonly string[]).includes(cat)) {
+      setTab(cat as FAQCategory);
+    }
+  }, []);
 
   // Per-category counts (always shows full totals, independent of search)
   const counts = useMemo(() => {
