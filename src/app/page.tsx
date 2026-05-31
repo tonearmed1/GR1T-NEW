@@ -1,21 +1,16 @@
 "use client";
-import { useLanguage } from "@/context/LanguageContext";
 import Hero from "@/components/home/hero";
 import PressStrip from "@/components/home/PressStrip";
 import BikesSection from "@/components/home/bikesSection";
-import GallerySection from "@/components/home/gallery";
+import TechFeatures from "@/components/home/TechFeatures";
 import GalleryTwoSection from "@/components/reusable/gallery2";
-import CTASection from "@/components/reusable/cta";
 
 import CTATwoSection from "@/components/home/cta2";
 
 import FAQSection from "@/components/home/FAQ";
-import PromoPopup from "@/components/reusable/promoPopup";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { t } = useLanguage();
-
   // Smooth scroll to #faqs when arriving on the homepage with a hash
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#faqs") {
@@ -32,15 +27,12 @@ export default function Home() {
       <Hero />
       <PressStrip />
       <BikesSection />
-      <GallerySection />
-      {/* <CTASection /> */}
+      {/* New consolidated tech story (replaces both the old 4-card GallerySection
+          on the homepage AND the standalone /tech page). */}
+      <TechFeatures />
       <GalleryTwoSection />
-      {/* <InstagramSection /> */}
       <CTATwoSection />
-      {/* <Insta /> */}
       <FAQSection />
-      {/* <EICMASection /> */}
-      {/* <PromoPopup /> */}
     </div>
   );
 }

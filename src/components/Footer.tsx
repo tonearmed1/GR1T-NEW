@@ -94,7 +94,8 @@ const Footer = () => {
       links: [
         { label: "G1S Street", href: "/G1S" },
         { label: "G1X Scrambler", href: "/G1X" },
-        { label: t("nav.tech"), href: "/tech" },
+        // /tech is deprecated — link points to the consolidated TechFeatures section on the homepage.
+        { label: t("nav.tech"), href: "/#tech-features" },
         { label: t("footer.warranty"), href: "/quality/warranty" },
         { label: t("footer.reservationTerms"), href: "/legal/reservation-terms" },
       ],
