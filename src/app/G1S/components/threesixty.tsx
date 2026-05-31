@@ -2,84 +2,18 @@
 
 import React, { useMemo, useState, useCallback, useRef, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 
-// Static imports enable blur placeholders and faster decoding
-import f1 from "../../../../public/mirage/360/360_gradi.3.1.png";
-import f2 from "../../../../public/mirage/360/360_gradi.3.2.png";
-import f3 from "../../../../public/mirage/360/360_gradi.3.3.png";
-import f4 from "../../../../public/mirage/360/360_gradi.3.4.png";
-import f5 from "../../../../public/mirage/360/360_gradi.3.5.png";
-import f6 from "../../../../public/mirage/360/360_gradi.3.6.png";
-import f7 from "../../../../public/mirage/360/360_gradi.3.7.png";
-import f8 from "../../../../public/mirage/360/360_gradi.3.8.png";
-import f9 from "../../../../public/mirage/360/360_gradi.3.9.png";
-import f10 from "../../../../public/mirage/360/360_gradi.3.10.png";
-import f11 from "../../../../public/mirage/360/360_gradi.3.11.png";
-import f12 from "../../../../public/mirage/360/360_gradi.3.12.png";
-import f13 from "../../../../public/mirage/360/360_gradi.3.13.png";
-import f14 from "../../../../public/mirage/360/360_gradi.3.14.png";
-import f15 from "../../../../public/mirage/360/360_gradi.3.15.png";
-import f16 from "../../../../public/mirage/360/360_gradi.3.16.png";
-import f17 from "../../../../public/mirage/360/360_gradi.3.17.png";
-import f18 from "../../../../public/mirage/360/360_gradi.3.18.png";
-import f19 from "../../../../public/mirage/360/360_gradi.3.19.png";
-import f20 from "../../../../public/mirage/360/360_gradi.3.20.png";
-import f21 from "../../../../public/mirage/360/360_gradi.3.21.png";
-import f22 from "../../../../public/mirage/360/360_gradi.3.22.png";
-import f23 from "../../../../public/mirage/360/360_gradi.3.23.png";
-import f24 from "../../../../public/mirage/360/360_gradi.3.24.png";
-import f25 from "../../../../public/mirage/360/360_gradi.3.25.png";
-import f26 from "../../../../public/mirage/360/360_gradi.3.26.png";
-import f27 from "../../../../public/mirage/360/360_gradi.3.27.png";
-import f28 from "../../../../public/mirage/360/360_gradi.3.28.png";
-import f29 from "../../../../public/mirage/360/360_gradi.3.29.png";
-import f30 from "../../../../public/mirage/360/360_gradi.3.30.png";
-import f31 from "../../../../public/mirage/360/360_gradi.3.31.png";
-
-const FRAME_COUNT = 31; // number of images available in /public/mirage/360
+// Build WebP frame paths at runtime — no static imports means no eager bundle loading
+const FRAME_COUNT = 31;
+const frameUrls: string[] = Array.from(
+  { length: FRAME_COUNT },
+  (_, i) => `/mirage/360/360_gradi.3.${i + 1}.webp`
+);
 
 const Threesixty = () => {
   const { t } = useLanguage();
-  // Build image paths once
-  const frames: StaticImageData[] = useMemo(
-    () => [
-      f1,
-      f2,
-      f3,
-      f4,
-      f5,
-      f6,
-      f7,
-      f8,
-      f9,
-      f10,
-      f11,
-      f12,
-      f13,
-      f14,
-      f15,
-      f16,
-      f17,
-      f18,
-      f19,
-      f20,
-      f21,
-      f22,
-      f23,
-      f24,
-      f25,
-      f26,
-      f27,
-      f28,
-      f29,
-      f30,
-      f31,
-    ],
-    []
-  );
-
-  // Derive count from actual frames to avoid out-of-bounds
+  const frames = useMemo(() => frameUrls, []);
   const frameCount = frames.length;
 
   const [index, setIndex] = useState(0);
@@ -111,11 +45,10 @@ const Threesixty = () => {
   const preload = useCallback(
     (i: number) => {
       if (typeof window === "undefined") return;
-      // Bounds check to prevent accessing undefined frames
       if (i < 0 || i >= frameCount) return;
       if (loadedSet.current.has(i)) return;
       const img = new window.Image();
-      img.src = frames[i].src;
+      img.src = frames[i];
       loadedSet.current.add(i);
     },
     [frames, frameCount]
@@ -168,26 +101,34 @@ const Threesixty = () => {
     }
   }, []);
 
-  // Warm preload: initial neighbors, then queue the rest progressively
+  // Lazy preload: wait for page load event before fetching remaining frames
   useEffect(() => {
-    // Preload initial neighborhood for instant rotation feel
     if (frameCount === 0) return;
-    const radius = 4;
-    for (let r = 0; r <= radius; r++) {
-      const a = (0 + r) % frameCount;
-      const b = (0 - r + frameCount) % frameCount;
-      preload(a);
-      preload(b);
-    }
+    // Always preload frame 0 immediately (shown on page load)
+    preload(0);
 
-    // Progressive queue for remaining frames (spaced to avoid burst)
-    const remaining: number[] = [];
-    for (let i = 0; i < frameCount; i++) {
-      if (!loadedSet.current.has(i)) remaining.push(i);
+    const prefetchAll = () => {
+      // Preload neighbors first for instant rotation feel
+      const radius = 4;
+      for (let r = 1; r <= radius; r++) {
+        preload((r) % frameCount);
+        preload((frameCount - r) % frameCount);
+      }
+      // Then queue the rest spaced out to avoid network burst
+      const remaining: number[] = [];
+      for (let i = 0; i < frameCount; i++) {
+        if (!loadedSet.current.has(i)) remaining.push(i);
+      }
+      remaining.forEach((i, idx) => {
+        window.setTimeout(() => preload(i), 100 * idx);
+      });
+    };
+
+    if (document.readyState === "complete") {
+      prefetchAll();
+    } else {
+      window.addEventListener("load", prefetchAll, { once: true });
     }
-    remaining.forEach((i, idx) => {
-      window.setTimeout(() => preload(i), 80 * idx);
-    });
   }, [preload, frameCount]);
 
   // As the index changes, keep neighbors preloaded
@@ -249,9 +190,8 @@ const Threesixty = () => {
               alt={`G1S 360 previous frame ${safePrevDisplayIndex + 1}`}
               fill
               className="object-contain opacity-0 transition-opacity duration-150"
-              priority
-              placeholder="blur"
-              quality={30}
+              priority={safePrevDisplayIndex === 0}
+              quality={55}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1400px"
               style={{ transform: "scale(1.35)", transformOrigin: "50% 50%", willChange: "opacity" }}
             />
@@ -261,9 +201,8 @@ const Threesixty = () => {
               alt={`G1S 360 frame ${safeDisplayIndex + 1}`}
               fill
               className="object-contain opacity-100 transition-opacity duration-150"
-              priority
-              placeholder="blur"
-              quality={30}
+              priority={safeDisplayIndex === 0}
+              quality={55}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1400px"
               style={{ transform: "scale(1.35)", transformOrigin: "50% 50%", willChange: "opacity" }}
             />

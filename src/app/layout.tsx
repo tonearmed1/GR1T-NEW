@@ -28,8 +28,14 @@ export async function generateMetadata(): Promise<Metadata> {
     description: "Electric motorcycles for the cities of tomorrow",
     metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN || "https://www.gritmotorcycles.com/"),
     alternates: {
+      // Each page should override canonical in its own metadata export.
+      // This root layout sets the homepage canonical as the fallback.
       canonical: process.env.NEXT_PUBLIC_DOMAIN || "https://www.gritmotorcycles.com/",
-      languages: { en: "/", it: "/it" },
+      languages: {
+        en: "/",
+        it: "/it",
+        "x-default": "/",
+      },
     },
     icons: {
       icon: [
@@ -104,6 +110,8 @@ export default function RootLayout({
         />
         <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-79JEY4LG0K" />
         <Script strategy="afterInteractive" src="/silktide/silktide-consent-manager.js" />
+        {/* Demote cookie banner h1 to h2 via aria-level — preserves visual style */}
+        <style>{`#silktide-modal h1 { font-size: inherit; } #silktide-modal h1[role] { display: contents; }`}</style>
         <Script
           id="silktide-config"
           strategy="afterInteractive"
@@ -255,9 +263,15 @@ export default function RootLayout({
           }}
         />
         <LanguageProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded focus:font-bold"
+          >
+            Skip to content
+          </a>
           <LangAttr />
           <ConditionalHeader />
-          <main className="flex-grow">
+          <main id="main-content" className="flex-grow">
             {children}
             <Analytics />
           </main>
