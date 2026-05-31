@@ -1,25 +1,39 @@
 import React from "react";
+import type { Metadata } from "next";
 import Hero from "./components/hero";
-import FAQsAccordian from "./components/accordiant";
+import FAQBrowser from "@/components/FAQBrowser";
+import FAQPageSchema from "./FAQPageSchema";
 
-const Faqs = () => (
-  <>
-    <Hero />
-    {/* <section className="bg-white py-8 sm:py-12">
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl text-gray-800">
-        <div className="space-y-4 sm:space-y-6">
-          <p className="text-base sm:text-lg">
-            By joining, you’ll secure an exclusive €1,500 discount on our first electric motorcycle, a premium lightweight model
-            designed and engineered in Italy’s Motor Valley. Built for urban freedom, it combines cutting-edge performance with
-            unmistakable design.
-          </p>
-        </div>
-      </div>
-    </section> */}
-    <section id="faqs">
-      <FAQsAccordian />
-    </section>
-  </>
-);
+const BASE = "https://www.gritmotorcycles.com";
 
-export default Faqs;
+export const metadata: Metadata = {
+  title: "FAQ | GR1T Motorcycles",
+  description:
+    "Answers about the GR1T G1S Street and G1X Scrambler — specs, battery, charging, licence requirements, reservations, delivery, warranty and more. Search or browse by category.",
+  alternates: {
+    canonical: `${BASE}/faqs`,
+    languages: {
+      en: `${BASE}/faqs`,
+      it: `${BASE}/it/faqs`,
+      "x-default": `${BASE}/faqs`,
+    },
+  },
+  openGraph: {
+    title: "FAQ | GR1T Motorcycles",
+    description: "Everything you need to know before you reserve a GR1T G1.",
+    url: `${BASE}/faqs`,
+  },
+};
+
+export default function FaqsPage() {
+  return (
+    <>
+      {/* JSON-LD FAQPage schema for SEO — emits all questions + plain-text answers */}
+      <FAQPageSchema />
+      <Hero />
+      <section id="faqs">
+        <FAQBrowser />
+      </section>
+    </>
+  );
+}

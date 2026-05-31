@@ -6,6 +6,10 @@ import Link from "next/link";
 import LicenseTableModal from "@/components/reusable/LicenseTableModal";
 import SpecsModal from "@/components/reusable/SpecsModal";
 
+// NOTE: This homepage FAQ keeps its own flat list for now (legacy structure).
+// The full categorized + searchable FAQ lives at /faqs (see src/components/FAQBrowser.tsx).
+// We surface a "View all questions" link at the bottom of this section.
+
 const getFAQS = (openSpecs: () => void, t: (key: string) => string) => [
   {
     question: t("home.faq.q.keySpecs"),
@@ -220,7 +224,7 @@ const getFAQS = (openSpecs: () => void, t: (key: string) => string) => [
 ];
 
 const FAQSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [showSpecsModal, setShowSpecsModal] = useState(false);
 
@@ -236,6 +240,20 @@ const FAQSection = () => {
           <div className="mb-6 sm:mb-12">
             <h2 className="text-2xl sm:text-5xl font-normal  font-britti text-white">{t("home.faq.title")}</h2>
             <p className="text-gray-200 text-base sm:text-xl font-britti font-medium">{t("home.faq.subtitle")}</p>
+          </div>
+
+          {/* "View all questions" — sends visitors who want the full categorized + searchable
+              experience to the dedicated FAQ page. */}
+          <div className="flex justify-end mb-4">
+            <Link
+              href={language === "it" ? "/it/faqs" : "/faqs"}
+              className="inline-flex items-center gap-2 text-white border border-white/30 hover:border-white rounded-full px-5 py-2 text-sm font-medium transition-colors"
+            >
+              {language === "it" ? "Tutte le domande" : "View all questions"}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
           </div>
 
           <div className="space-y-1">
