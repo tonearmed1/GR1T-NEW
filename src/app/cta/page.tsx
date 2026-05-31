@@ -152,10 +152,9 @@ export default function CTAPage() {
                 Reserve yours today!
               </h1>
               <p className="mt-6 text-lg">
-                Join the GR1T Founder’s Club and receive a <span className="font-bold">€ 1,500 discount</span> on your first
-                motorcycle.
+                Secure your <span className="font-bold">priority build slot</span> for the GR1T G1. Be among the first to ride.
               </p>
-              <p className="mt-8 text-sm text-black/60 md:min-h-[24px]">100% refundable. Risk free.</p>
+              <p className="mt-8 text-sm text-black/60 md:min-h-[24px]">€100 fully refundable. No commitment.</p>
               <div className="flex justify-center">
                 <button
                   onClick={reserveNow}

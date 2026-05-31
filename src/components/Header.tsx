@@ -34,10 +34,11 @@ const Header = () => {
     e.stopPropagation(); // prevent closing immediately
     setOpenDropdown(openDropdown === index ? null : index);
   };
-  // Navigation links with optional dropdown children
+  // Navigation links — simplified per conversion audit (May 2026).
+  // - Removed: Home (logo handles it), Tech (content merged into product pages), FAQs (anchor jump on /),
+  //   Quality top-level (folded under About). Corporate (B2B audiences) moved to footer only.
+  // - Reserve is rendered separately as the primary CTA button (right side).
   const navigationLinks = [
-    { label: t("nav.home"), href: "/" },
-    { label: t("nav.tech"), href: "/tech" },
     {
       label: t("nav.bikes"),
       children: [
@@ -46,28 +47,15 @@ const Header = () => {
       ],
     },
     {
-      label: t("nav.quality"),
-      href: "/quality",
+      label: t("nav.about"),
+      href: "/about-us",
       children: [
+        { label: t("nav.quality"), href: "/quality" },
         { label: t("nav.sustainability"), href: "/quality/sustainablity" },
         { label: t("footer.warranty"), href: "/quality/warranty" },
       ],
     },
-    { label: t("nav.about"), href: "/about-us" },
-    {
-      label: t("nav.corporate"),
-      href: "/corporate",
-      children: [
-        { label: t("footer.workWithUs"), href: "/corporate/work-with-us" },
-        { label: t("corporate.investors.link"), href: "/corporate/investors" },
-        { label: t("nav.events"), href: "/corporate/conferences" },
-        { label: t("corporate.distributors.link"), href: "/corporate/distributors" },
-        { label: t("corporate.fleetSales.link"), href: "/corporate/fleet-sales" },
-      ],
-    },
     { label: t("nav.news"), href: "/news" },
-    { label: t("home.faq.title"), href: language === "it" ? "/it#faqs" : "/en#faqs" },
-    // { label: t("nav.foundersCircle"), href: "/founders-circle" },
     { label: t("nav.contact"), href: "/contact" },
   ];
 
@@ -207,6 +195,19 @@ const Header = () => {
                 )}
               </div>
             ))}
+
+            {/* Reserve CTA — primary action, visually prominent (orange) */}
+            <Link
+              href="/reserve"
+              className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 transition-colors"
+            >
+              {t("common.reserveNow")}
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white text-orange-500">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+            </Link>
 
             {/* Language Toggle - Desktop */}
             <div className="relative">
@@ -349,6 +350,18 @@ const Header = () => {
                 )}
               </div>
             ))}
+
+            {/* Reserve CTA — top of mobile drawer for visibility */}
+            <Link
+              href="/reserve"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mx-4 my-3 inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-5 py-3 text-base font-semibold text-white shadow-sm hover:bg-orange-600 transition-colors"
+            >
+              {t("common.reserveNow")}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
 
             {/* Language Toggle - Mobile */}
             <button

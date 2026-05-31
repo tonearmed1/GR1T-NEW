@@ -45,7 +45,7 @@ export default function Hero() {
               <p className="text-lg md:text-2xl text-white/90 text-nowrap">{t("home.tagline")}</p>
               <div className="mt-6">
                 <Link
-                  href="/checkout?model=G1S"
+                  href="/reserve"
                   className="inline-flex items-center gap-2 rounded-full bg-white/90 text-2xl text-black px-7 py-4  md:text-base hover:bg-white transition-colors"
                 >
                   {t("common.reserveNow")}

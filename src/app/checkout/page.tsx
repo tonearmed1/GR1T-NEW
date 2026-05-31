@@ -118,7 +118,9 @@ function CheckoutContent() {
     address: "",
     address2: "",
     city: "",
-    subscribe: false,
+    // Default-checked: production-journal updates is what most reservers want and reduces a
+    // post-conversion re-engagement gap. Visitor can opt out before confirming.
+    subscribe: true,
     agree: false,
   });
 
@@ -573,12 +575,41 @@ function CheckoutContent() {
             </button>
           </div>
 
-          {/* <div className="mt-6">
+          {/* Reservation reassurance banner — shown above the form so the visitor sees
+              the offer, the price, and the refundability before being asked for data. */}
+          <div className="mt-6 rounded-lg bg-zinc-50 border border-zinc-200 p-4 md:p-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base text-black">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-orange-500 text-white font-bold">€</span>
+                <div>
+                  <div className="font-semibold">€{depositToday} today</div>
+                  <div className="text-zinc-500 text-xs md:text-sm">Estimated balance €{(estimatedPrice - depositToday).toLocaleString()} on delivery</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-600 text-white font-bold">↻</span>
+                <div>
+                  <div className="font-semibold">100% refundable</div>
+                  <div className="text-zinc-500 text-xs md:text-sm">5 business days · no forms</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-black text-orange-400 font-bold">★</span>
+                <div>
+                  <div className="font-semibold">Priority build slot</div>
+                  <div className="text-zinc-500 text-xs md:text-sm">First batch · early 2027 delivery</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* TODO: Re-enable Stripe Express Checkout Element (Apple Pay / Google Pay)
+              once tested on the new client_secret flow — adds ~10–30% lift on mobile.
+              See setupPaymentElements() above; the expressCheckout creation lines exist
+              but are commented out.
+          <div className="mt-6">
             <h2 className="text-base font-semibold text-black">{t("checkout.express.title")}</h2>
-            <div
-              id="express-checkout-element"
-              className="mt-2 w-full rounded-md border border-zinc-300 px-3 py-2 text-base text-black"
-            />
+            <div id="express-checkout-element" className="mt-2 w-full rounded-md border border-zinc-300 px-3 py-2 text-base text-black" />
           </div> */}
 
           {/* Two-column layout */}
@@ -753,22 +784,32 @@ function CheckoutContent() {
                   />
                 </div>
               </div>
-              <label className="block text-base text-black">
-                {t("checkout.placeholder.tshirt") || "T‑shirt size"} <span className="text-red-500">*</span>
-              </label>
-              <select
-                value={form.tshirtSize || ""}
-                onChange={(e) => setForm((prev) => ({ ...prev, tshirtSize: e.target.value }))}
-                required
-                className="w-full rounded-md border border-zinc-300 px-3 py-3 text-base text-black outline-none focus:border-black"
-              >
-                <option value="">{t("checkout.placeholder.tshirt") || "T‑shirt size"}</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-                <option value="XXL">XXL</option>
-              </select>
+              {/* Founder&rsquo;s gift — explained so the visitor doesn't wonder why their bike
+                  reservation is asking for clothing size. */}
+              <div className="mt-4 rounded-md bg-orange-50 border border-orange-200 p-3 md:p-4">
+                <div className="text-xs md:text-sm font-semibold text-orange-700 uppercase tracking-wider mb-2">
+                  Founder&rsquo;s gift
+                </div>
+                <p className="text-xs md:text-sm text-zinc-700 mb-3">
+                  Every reservation includes a welcome gift, shipped within 7 days. Pick your size below.
+                </p>
+                <label className="block text-base text-black">
+                  {t("checkout.placeholder.tshirt") || "T‑shirt size"} <span className="text-red-500">*</span>
+                </label>
+                <select
+                  value={form.tshirtSize || ""}
+                  onChange={(e) => setForm((prev) => ({ ...prev, tshirtSize: e.target.value }))}
+                  required
+                  className="w-full rounded-md border border-zinc-300 px-3 py-3 text-base text-black outline-none focus:border-black bg-white"
+                >
+                  <option value="">{t("checkout.placeholder.tshirt") || "T‑shirt size"}</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="XXL">XXL</option>
+                </select>
+              </div>
             </div>
 
             {/* Payment section */}
