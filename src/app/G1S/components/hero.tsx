@@ -6,7 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 const G1SHero = () => {
   const { t } = useLanguage();
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-[55vh] min-h-[420px] sm:h-[60vh] w-full overflow-hidden mt-16">
       {/* Hero Image Background */}
       <div className="absolute inset-0 -z-10">
         <Image src="/grit-g1/hero.jpg" alt="Contact Hero" fill className="object-cover" sizes="100vw" priority />

@@ -16,11 +16,19 @@ const TOPICS: Array<{
   description: { en: string; it: string };
 }> = [
   {
+    slug: "about",
+    icon: "G",
+    description: {
+      en: "Who we are, where we're based, our story",
+      it: "Chi siamo, dove siamo, la nostra storia",
+    },
+  },
+  {
     slug: "motorcycles",
     icon: "M",
     description: {
-      en: "Specs, performance, models and tyres",
-      it: "Specifiche, prestazioni, modelli e pneumatici",
+      en: "Full specs, performance, models and tyres",
+      it: "Specifiche complete, prestazioni, modelli, pneumatici",
     },
   },
   {
@@ -37,6 +45,14 @@ const TOPICS: Array<{
     description: {
       en: "Reservations, delivery, pricing, financing",
       it: "Prenotazioni, consegna, prezzi, finanziamento",
+    },
+  },
+  {
+    slug: "customisation",
+    icon: "✶",
+    description: {
+      en: "Configurator, colours, accessories, wraps",
+      it: "Configuratore, colori, accessori, wrap",
     },
   },
   {
@@ -68,11 +84,13 @@ export default function TopicCards() {
 
   // Count questions per category (matches the badges shown in FAQBrowser pills)
   const counts: Record<FAQCategory, number> = {
+    about: 0,
     motorcycles: 0,
     battery: 0,
     licence: 0,
     buying: 0,
     warranty: 0,
+    customisation: 0,
   };
   faqs.forEach((f) => {
     counts[f.category] += 1;

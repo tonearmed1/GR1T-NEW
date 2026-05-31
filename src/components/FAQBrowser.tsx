@@ -29,11 +29,13 @@ import {
  */
 
 const VALID_CATEGORIES: ReadonlyArray<FAQCategory> = [
+  "about",
   "motorcycles",
   "battery",
   "licence",
   "buying",
   "warranty",
+  "customisation",
 ];
 
 type Tab = "all" | FAQCategory;

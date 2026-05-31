@@ -15,25 +15,40 @@ const BASE = "https://www.gritmotorcycles.com";
  * generateStaticParams; anything else returns 404.
  */
 
-type CategorySlug = "motorcycles" | "battery" | "buying" | "licence" | "warranty";
+type CategorySlug =
+  | "about"
+  | "motorcycles"
+  | "battery"
+  | "buying"
+  | "licence"
+  | "warranty"
+  | "customisation";
 
 const VALID: ReadonlyArray<CategorySlug> = [
+  "about",
   "motorcycles",
   "battery",
   "buying",
   "licence",
   "warranty",
+  "customisation",
 ];
 
 const META: Record<
   CategorySlug,
   { titleEN: string; titleIT: string; descEN: string; descIT: string }
 > = {
+  about: {
+    titleEN: "About GR1T — Help Center",
+    titleIT: "Su GR1T — Centro assistenza",
+    descEN: "Who GR1T is, where we're based, where the motorcycles are made, and how to reach us.",
+    descIT: "Chi è GR1T, dove abbiamo sede, dove sono costruite le motociclette e come contattarci.",
+  },
   motorcycles: {
-    titleEN: "Motorcycles — Help Center",
-    titleIT: "Motociclette — Centro assistenza",
-    descEN: "Specs, performance, models, tyres, and customisation — answers about the GR1T G1 Series.",
-    descIT: "Specifiche, prestazioni, modelli, pneumatici e personalizzazione — domande sulla GR1T G1 Series.",
+    titleEN: "Bike Specs — Help Center",
+    titleIT: "Specifiche — Centro assistenza",
+    descEN: "Full G1S and G1X specifications, performance, tyres, dimensions and licence requirements.",
+    descIT: "Specifiche complete G1S e G1X, prestazioni, pneumatici, dimensioni e requisiti di patente.",
   },
   battery: {
     titleEN: "Battery & Charging — Help Center",
@@ -58,6 +73,12 @@ const META: Record<
     titleIT: "Garanzia & Assistenza — Centro assistenza",
     descEN: "GR1T warranty terms, the GR1T App, theft protection, and how to get support.",
     descIT: "Termini di garanzia GR1T, l'app GR1T, protezione antifurto e come ricevere assistenza.",
+  },
+  customisation: {
+    titleEN: "Customisation — Help Center",
+    titleIT: "Personalizzazione — Centro assistenza",
+    descEN: "Configurator options, colours, accessories, after-delivery wraps and warranty rules.",
+    descIT: "Opzioni del configuratore, colori, accessori, wrap dopo la consegna e regole di garanzia.",
   },
 };
 

@@ -15,9 +15,11 @@ import { CATEGORY_LABELS, FAQCategory, useFAQs } from "@/data/faqs";
 type CategorySlug = Extract<FAQCategory, FAQCategory>;
 
 const OTHER_TOPICS: ReadonlyArray<FAQCategory> = [
+  "about",
   "motorcycles",
   "battery",
   "buying",
+  "customisation",
   "licence",
   "warranty",
 ];

@@ -3,7 +3,7 @@ import Hero from "@/components/home/hero";
 import PressStrip from "@/components/home/PressStrip";
 import BikesSection from "@/components/home/bikesSection";
 import TechFeatures from "@/components/home/TechFeatures";
-import GalleryTwoSection from "@/components/reusable/gallery2";
+import GR1Tstagram from "@/components/home/GR1Tstagram";
 
 import CTATwoSection from "@/components/home/cta2";
 
@@ -30,7 +30,9 @@ export default function Home() {
       {/* New consolidated tech story (replaces both the old 4-card GallerySection
           on the homepage AND the standalone /tech page). */}
       <TechFeatures />
-      <GalleryTwoSection />
+      {/* GalleryTwoSection replaced with the full-width Instagram strip "GR1Tstagram".
+          Falls back to a placeholder grid until NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN is set. */}
+      <GR1Tstagram />
       <CTATwoSection />
       <FAQSection />
     </div>
