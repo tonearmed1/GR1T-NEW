@@ -3,13 +3,13 @@ import React from "react";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 
-const MirageHero = () => {
+const G1SHero = () => {
   const { t } = useLanguage();
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Hero Image Background */}
       <div className="absolute inset-0 -z-10">
-        <Image src="/mirage/hero.jpg" alt="Contact Hero" fill className="object-cover" sizes="100vw" priority />
+        <Image src="/grit-g1/hero.jpg" alt="Contact Hero" fill className="object-cover" sizes="100vw" priority />
         {/* Dark overlay for better text visibility */}
         <div className="absolute inset-0 bg-black opacity-40"></div>
       </div>
@@ -31,4 +31,4 @@ const MirageHero = () => {
   );
 };
 
-export default MirageHero;
+export default G1SHero;

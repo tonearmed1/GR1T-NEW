@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 
-const MirageG1XHero = () => {
+const G1XHero = () => {
   const { t } = useLanguage();
 
   return (
@@ -32,4 +32,4 @@ const MirageG1XHero = () => {
   );
 };
 
-export default MirageG1XHero;
+export default G1XHero;

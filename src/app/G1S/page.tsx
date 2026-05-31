@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
-import MirageHero from "./components/hero";
-import AboutMirage from "./components/aboutMirage";
+import G1SHero from "./components/hero";
+import AboutG1S from "./components/aboutG1S";
 import Threesixty from "./components/threesixty";
 import SpecsSections from "./components/specs";
 import CTASection from "./components/cta";
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description:
       "Italian-designed electric motorcycle: 150 km range, 130 km/h, 36 hp peak power, two removable batteries.",
     url: `${BASE}/G1S`,
-    images: [{ url: `${BASE}/mirage/hero.jpg`, width: 1200, height: 630, alt: "GR1T G1S Street motorcycle" }],
+    images: [{ url: `${BASE}/grit-g1/hero.jpg`, width: 1200, height: 630, alt: "GR1T G1S Street motorcycle" }],
   },
 };
 
@@ -38,7 +38,7 @@ const productSchema = {
   "@type": "Product",
   name: "GR1T G1S Street",
   brand: { "@type": "Brand", name: "GR1T Motorcycles" },
-  image: `${BASE}/mirage/hero.jpg`,
+  image: `${BASE}/grit-g1/hero.jpg`,
   description:
     "The GR1T G1S Street is an Italian-designed electric motorcycle with 150 km range, 130 km/h top speed, 36 hp peak power and two removable batteries.",
   offers: {
@@ -60,13 +60,13 @@ const orgSchema = {
   ],
 };
 
-const Mirage = () => {
+const G1SPage = () => {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
-      <MirageHero />
-      <AboutMirage />
+      <G1SHero />
+      <AboutG1S />
       <Threesixty />
       <SpecsSections />
       {/* <CTASection /> */}
@@ -77,4 +77,4 @@ const Mirage = () => {
   );
 };
 
-export default Mirage;
+export default G1SPage;

@@ -13,7 +13,7 @@ export default function G1XGallery() {
       {/* Bike image */}
       <div className="relative w-full max-w-5xl h-[320px] sm:h-[480px] lg:h-[600px]">
         <Image
-          src="/mirageG1X/GR1T_off-road.1.png" // change this to your image path
+          src="/grit-g1x/GR1T_off-road.1.png" // change this to your image path
           alt="Hightail bike"
           fill
           priority

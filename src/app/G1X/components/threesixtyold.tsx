@@ -4,9 +4,9 @@ import React, { useMemo, useState, useCallback, useRef, useEffect } from "react"
 import Image, { type StaticImageData } from "next/image";
 
 // Static imports enable blur placeholders and faster decoding
-import f1 from "../../../../public/mirageG1X/MAIN_image_MIRAGE-X.png";
+import f1 from "../../../../public/grit-g1x/main_g1x.png";
 
-const FRAME_COUNT = 1; // number of images available in /public/mirage/360
+const FRAME_COUNT = 1; // number of images available in /public/grit-g1/360
 
 const Threesixty = () => {
   // Build image paths once

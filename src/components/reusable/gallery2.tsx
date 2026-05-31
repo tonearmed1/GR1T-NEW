@@ -107,7 +107,7 @@ const GalleryTwoSection = () => {
             >
               <div className="relative w-full aspect-[16/10] md:aspect-[16/8] max-h-[80%] md:max-h-[95%]">
                 <Image
-                  src="/mirageG1x/orange01.jpg"
+                  src="/grit-g1x/orange01.jpg"
                   alt="Wide shot"
                   fill
                   sizes="(max-width: 768px) 100vw, 55vw"

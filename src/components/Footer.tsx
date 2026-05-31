@@ -135,19 +135,61 @@ const Footer = () => {
     <footer className="w-full bg-black text-white py-12">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-6xl lg:max-w-7xl px-4 md:px-0">
-        {/* Logo and Company Info */}
-        <div className="mb-12">
-          <div className="flex flex-row items-center justify-baseline space-x-6">
-            <Image
-              src="/LOGO_big_WHITE.svg"
-              alt="GR1T Logo"
-              width={200}
-              height={70}
-              className=""
-              sizes="(max-width: 768px) 150px, 200px"
-              loading="lazy"
-            />
+        {/* Top band — Logo (left), Social + Newsletter (right) above the divider line */}
+        <div className="mb-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div className="flex flex-row items-center">
+              <Image
+                src="/LOGO_big_WHITE.svg"
+                alt="GR1T Motorcycles logo"
+                width={200}
+                height={70}
+                sizes="(max-width: 768px) 150px, 200px"
+                loading="lazy"
+              />
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8">
+              {/* Social icons */}
+              <div className="flex items-center gap-1" aria-label="GR1T on social media">
+                {socialLinks.map((social, index) => (
+                  <SocialIcon key={index} type={social.type} href={social.href} />
+                ))}
+              </div>
+
+              {/* Newsletter signup — inline, top-right per the spec */}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  onSubmit();
+                }}
+                className="flex items-center w-full sm:w-auto"
+                aria-label={t("footer.newsletter.title")}
+              >
+                <input
+                  type="email"
+                  value={email}
+                  onChange={onEmailChange}
+                  required
+                  placeholder={t("cta.form.emailPlaceholder")}
+                  aria-label={t("cta.form.emailPlaceholder")}
+                  className="flex-1 sm:w-64 rounded-l-full bg-white text-black placeholder:text-zinc-500 px-4 py-2.5 text-sm outline-none border border-white"
+                />
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="rounded-r-full bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-4 py-2.5 border border-orange-500 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                >
+                  {loading ? t("cta.form.submitting") : t("footer.newsletter.joinNow")}
+                </button>
+              </form>
+            </div>
           </div>
+          {status !== "idle" && (
+            <p className={`mt-3 text-xs text-right ${status === "success" ? "text-emerald-400" : "text-red-400"}`}>
+              {message}
+            </p>
+          )}
           <div className="w-full h-px bg-white my-8"></div>
         </div>
 
@@ -213,12 +255,6 @@ const Footer = () => {
                 <p>Germany</p>
                 <p className="mt-2">Tel +49 (0) 30 300 139 603</p>
               </address>
-            </div>
-            {/* Social Media Links */}
-            <div className="flex space-x-1 mt-4">
-              {socialLinks.map((social, index) => (
-                <SocialIcon key={index} type={social.type} href={social.href} />
-              ))}
             </div>
             {/* Email */}
             <div className="text-sm text-gray-400 mt-4">

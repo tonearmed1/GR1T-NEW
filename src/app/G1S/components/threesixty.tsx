@@ -8,7 +8,7 @@ import Image from "next/image";
 const FRAME_COUNT = 31;
 const frameUrls: string[] = Array.from(
   { length: FRAME_COUNT },
-  (_, i) => `/mirage/360/360_gradi.3.${i + 1}.webp`
+  (_, i) => `/grit-g1/360/360_gradi.3.${i + 1}.webp`
 );
 
 const Threesixty = () => {
@@ -258,34 +258,34 @@ const Threesixty = () => {
             value={index}
             onChange={onSliderChange}
             aria-label="Rotate G1S"
-            className="mirage-slider w-[92%] sm:w-[75%] lg:w-[65%] appearance-none h-3 rounded outline-none"
+            className="g1-slider w-[92%] sm:w-[75%] lg:w-[65%] appearance-none h-3 rounded outline-none"
           />
         </div>
         <style jsx>{`
-          .mirage-slider {
+          .g1-slider {
             accent-color: #ffffff;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
             box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.3);
             border-radius: 9999px;
             transition: transform 200ms ease;
           }
-          .group:hover .mirage-slider {
+          .group:hover .g1-slider {
             transform: rotateX(8deg);
             transform-origin: center;
           }
-          .mirage-slider::-webkit-slider-runnable-track {
+          .g1-slider::-webkit-slider-runnable-track {
             height: 12px;
             border-radius: 9999px;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
             box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.3);
           }
-          .mirage-slider::-moz-range-track {
+          .g1-slider::-moz-range-track {
             height: 12px;
             border-radius: 9999px;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
             box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.3);
           }
-          .mirage-slider::-webkit-slider-thumb {
+          .g1-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
             width: 22px;
@@ -298,11 +298,11 @@ const Threesixty = () => {
             transform: translateZ(0);
             margin-top: -5px; /* Center thumb on track */
           }
-          .mirage-slider:active::-webkit-slider-thumb {
+          .g1-slider:active::-webkit-slider-thumb {
             transform: translateZ(8px) scale(1.04);
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.55), inset 0 -2px 5px rgba(0, 0, 0, 0.3);
           }
-          .mirage-slider::-moz-range-thumb {
+          .g1-slider::-moz-range-thumb {
             width: 22px;
             height: 22px;
             border-radius: 50%;
@@ -312,7 +312,7 @@ const Threesixty = () => {
             transition: transform 150ms ease, box-shadow 150ms ease;
             transform: translateZ(0);
           }
-          .mirage-slider:active::-moz-range-thumb {
+          .g1-slider:active::-moz-range-thumb {
             transform: translateZ(8px) scale(1.04);
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.55), inset 0 -2px 5px rgba(0, 0, 0, 0.3);
           }

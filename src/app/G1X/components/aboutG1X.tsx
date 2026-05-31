@@ -2,12 +2,12 @@
 
 import React from "react";
 import Image from "next/image";
-import heroImg from "../../../../public/mirageG1X/01_mirage-x.png";
+import heroImg from "../../../../public/grit-g1x/01_g1x.png";
 
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 
-const AboutMirageG1X = () => {
+const AboutG1X = () => {
   const { t } = useLanguage();
   return (
     <section className="bg-white py-12 sm:py-16">
@@ -65,4 +65,4 @@ const AboutMirageG1X = () => {
   );
 };
 
-export default AboutMirageG1X;
+export default AboutG1X;

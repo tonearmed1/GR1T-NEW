@@ -729,7 +729,7 @@ type TranslationKey =
   // G1X Hero
   | "g1x.hero.title"
   | "g1x.hero.subtitle"
-  // G1X About/Mirage
+  // G1X About
   | "g1x.about.header.line1"
   | "g1x.about.header.line2"
   | "g1x.about.header.line3"

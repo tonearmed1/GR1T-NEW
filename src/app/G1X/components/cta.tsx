@@ -15,7 +15,7 @@ const CTASectionG1X = () => {
           <div className="w-full">
             <div className="relative w-full aspect-[2/3] md:aspect-[5/4] rounded-xl overflow-hidden ">
               <Image
-                src="/mirageG1X/02_mirage-x.png"
+                src="/grit-g1x/02_g1x.png"
                 alt="GR1T G1X on the road"
                 fill
                 className="object-contain"
