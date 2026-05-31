@@ -4,9 +4,11 @@ type SocialIconProps = {
   type: "instagram" | "facebook" | "linkedin" | "youtube";
   href?: string;
   className?: string;
+  /** When true, render only the <svg> — caller provides its own <a> wrapper. */
+  asChild?: boolean;
 };
 
-const SocialIcon: React.FC<SocialIconProps> = ({ type, href = "#", className = "h-6 w-6" }) => {
+const SocialIcon: React.FC<SocialIconProps> = ({ type, href = "#", className = "h-6 w-6", asChild = false }) => {
   const icons = {
     instagram: (
       <path
@@ -34,11 +36,17 @@ const SocialIcon: React.FC<SocialIconProps> = ({ type, href = "#", className = "
     ),
   };
 
+  const svg = (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      {icons[type]}
+    </svg>
+  );
+
+  if (asChild) return svg;
+
   return (
     <a href={href} aria-label={type} target="_blank" rel="noopener noreferrer">
-      <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-        {icons[type]}
-      </svg>
+      {svg}
     </a>
   );
 };

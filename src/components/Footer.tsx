@@ -135,9 +135,9 @@ const Footer = () => {
     <footer className="w-full bg-black text-white py-12">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-6xl lg:max-w-7xl px-4 md:px-0">
-        {/* Top band — Logo (left), Social + Newsletter (right) above the divider line */}
+        {/* Top band — Logo (left), Round social icons (right) above the divider line */}
         <div className="mb-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="flex flex-row items-center justify-between gap-4">
             <div className="flex flex-row items-center">
               <Image
                 src="/LOGO_big_WHITE.svg"
@@ -149,47 +149,22 @@ const Footer = () => {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8">
-              {/* Social icons */}
-              <div className="flex items-center gap-1" aria-label="GR1T on social media">
-                {socialLinks.map((social, index) => (
-                  <SocialIcon key={index} type={social.type} href={social.href} />
-                ))}
-              </div>
-
-              {/* Newsletter signup — inline, top-right per the spec */}
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  onSubmit();
-                }}
-                className="flex items-center w-full sm:w-auto"
-                aria-label={t("footer.newsletter.title")}
-              >
-                <input
-                  type="email"
-                  value={email}
-                  onChange={onEmailChange}
-                  required
-                  placeholder={t("cta.form.emailPlaceholder")}
-                  aria-label={t("cta.form.emailPlaceholder")}
-                  className="flex-1 sm:w-64 rounded-l-full bg-white text-black placeholder:text-zinc-500 px-4 py-2.5 text-sm outline-none border border-white"
-                />
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="rounded-r-full bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-4 py-2.5 border border-orange-500 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+            {/* Round social icons — 40px circles, white border, white icon, orange on hover */}
+            <div className="flex items-center gap-2 sm:gap-3" aria-label="GR1T on social media">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.type}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.type}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white text-white hover:bg-white hover:text-black hover:border-white transition-colors duration-200"
                 >
-                  {loading ? t("cta.form.submitting") : t("footer.newsletter.joinNow")}
-                </button>
-              </form>
+                  <SocialIcon type={social.type} asChild className="h-5 w-5" />
+                </a>
+              ))}
             </div>
           </div>
-          {status !== "idle" && (
-            <p className={`mt-3 text-xs text-right ${status === "success" ? "text-emerald-400" : "text-red-400"}`}>
-              {message}
-            </p>
-          )}
           <div className="w-full h-px bg-white my-8"></div>
         </div>
 
@@ -240,7 +215,7 @@ const Footer = () => {
           {/* Contact Info */}
           <div className="col-span-2">
             <h3 className="font-medium mb-4">{t("contact.title")}</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               <address className="not-italic text-sm text-white space-y-1">
                 <p>GR1T Motorcycles GmbH</p>
                 <p>Piazza Gae Aulenti 1, Torre B</p>
@@ -254,6 +229,12 @@ const Footer = () => {
                 <p>16025 Berlin</p>
                 <p>Germany</p>
                 <p className="mt-2">Tel +49 (0) 30 300 139 603</p>
+              </address>
+              <address className="not-italic text-sm text-white space-y-1">
+                <p>GR1T Motorcycles (Holdings) Ltd</p>
+                <p>Archbishop Makarios III, 133</p>
+                <p>Limassol, 3085</p>
+                <p>Cyprus</p>
               </address>
             </div>
             {/* Email */}
