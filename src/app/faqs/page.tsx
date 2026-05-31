@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import Hero from "./components/hero";
+import SearchBar from "./components/SearchBar";
 import TopicCards from "./components/TopicCards";
 import StillStuckCTA from "./components/StillStuckCTA";
 import FAQBrowser from "@/components/FAQBrowser";
@@ -34,14 +35,22 @@ export default function FaqsPage() {
       <FAQPageSchema />
 
       {/* Help Center structure:
-            Hero          → page title
-            TopicCards    → 5 clickable cards (Maeving-style), deep-link to FAQBrowser categories
-            FAQBrowser    → search + category pills + accordion (the answers)
-            StillStuckCTA → contact fallback for the visitor we didn't answer */}
+            Hero          → page title (left-aligned to match content)
+            SearchBar     → above topic cards, writes URL ?q= to share state with FAQBrowser
+            TopicCards    → 5 clickable cards, deep-link to FAQBrowser categories via URL hash
+            FAQBrowser    → accordion only (pills removed; cards do the category job).
+                            Reads ?q + #category- from URL. Light theme.
+            StillStuckCTA → contact fallback for the visitor we didn't answer
+          Suspense wrapper is required for useSearchParams in client children. */}
       <Hero />
+      <Suspense fallback={null}>
+        <SearchBar />
+      </Suspense>
       <TopicCards />
       <section id="faqs">
-        <FAQBrowser />
+        <Suspense fallback={null}>
+          <FAQBrowser />
+        </Suspense>
       </section>
       <StillStuckCTA />
     </>

@@ -2,12 +2,31 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import {
   CATEGORY_LABELS,
   FAQCategory,
   useFAQs,
 } from "@/data/faqs";
+
+/**
+ * FAQBrowser — the accordion list at the bottom of the Help Center.
+ *
+ * State sources (no local search/category state — both come from URL):
+ *   - search query: ?q=charging
+ *   - category filter: #category-battery
+ *
+ * The standalone <SearchBar /> writes ?q=. The <TopicCards /> use href links
+ * that include the #category- hash. This component just reads both and filters.
+ *
+ * Pills were removed (per design: the topic cards above already provide category
+ * navigation, pills became redundant). A small "Filtering by …" pill with a clear
+ * button is shown ONLY when a category is active, so the visitor knows the
+ * current state and can reset.
+ *
+ * Light theme — no more dark strip. Matches the rest of the help center.
+ */
 
 const VALID_CATEGORIES: ReadonlyArray<FAQCategory> = [
   "motorcycles",
@@ -17,35 +36,20 @@ const VALID_CATEGORIES: ReadonlyArray<FAQCategory> = [
   "warranty",
 ];
 
-/**
- * FAQBrowser — the full FAQ experience: search + category pills + accordion.
- * Used on /faqs. Self-contained, dark-theme to match the rest of the site.
- *
- * Behaviour:
- *  - Live search filters as you type (matches question + answer text)
- *  - Category pills filter to one section; "All" shows everything
- *  - Search + category combine (e.g. "Battery" pill + "charge" search)
- *  - "No results" state with reset link
- *  - Question count per category shown on each pill
- *  - One accordion open at a time (cleaner reading)
- */
-
 type Tab = "all" | FAQCategory;
 
 const COPY = {
   en: {
-    searchPlaceholder: "Search questions…",
-    all: "All",
     noResults: "No questions matched your search.",
     clear: "Clear filters",
     questionsLabel: (n: number) => `${n} question${n === 1 ? "" : "s"}`,
+    filteringBy: "Filtering by",
   },
   it: {
-    searchPlaceholder: "Cerca domande…",
-    all: "Tutte",
     noResults: "Nessuna domanda corrisponde alla tua ricerca.",
     clear: "Reimposta filtri",
     questionsLabel: (n: number) => `${n} domand${n === 1 ? "a" : "e"}`,
+    filteringBy: "Filtro attivo",
   },
 } as const;
 
@@ -55,38 +59,31 @@ export default function FAQBrowser() {
   const c = COPY[lang];
 
   const faqs = useFAQs();
-  const [query, setQuery] = useState("");
+  const router = useRouter();
+  const params = useSearchParams();
+  const query = params.get("q") ?? "";
+
   const [tab, setTab] = useState<Tab>("all");
   const [openId, setOpenId] = useState<string | null>(null);
 
-  // Deep-linking: read URL hash on mount (e.g. /faqs#category-battery)
-  // so the topic cards on the help-center hero can pre-select a category.
+  // Read URL hash on mount + when it changes (e.g., user clicks a topic card).
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const hash = window.location.hash.replace(/^#/, "");
-    const m = hash.match(/^category-(.+)$/);
-    if (!m) return;
-    const cat = m[1];
-    if ((VALID_CATEGORIES as readonly string[]).includes(cat)) {
-      setTab(cat as FAQCategory);
-    }
-  }, []);
 
-  // Per-category counts (always shows full totals, independent of search)
-  const counts = useMemo(() => {
-    const c: Record<Tab, number> = {
-      all: faqs.length,
-      motorcycles: 0,
-      battery: 0,
-      licence: 0,
-      buying: 0,
-      warranty: 0,
+    const sync = () => {
+      const hash = window.location.hash.replace(/^#/, "");
+      const m = hash.match(/^category-(.+)$/);
+      if (m && (VALID_CATEGORIES as readonly string[]).includes(m[1])) {
+        setTab(m[1] as FAQCategory);
+      } else if (!m) {
+        setTab("all");
+      }
     };
-    faqs.forEach((f) => {
-      c[f.category] += 1;
-    });
-    return c;
-  }, [faqs]);
+
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
 
   // Filtered list: category, then search
   const filtered = useMemo(() => {
@@ -102,96 +99,57 @@ export default function FAQBrowser() {
   }, [faqs, query, tab]);
 
   const resetFilters = () => {
-    setQuery("");
     setTab("all");
+    // Clear both ?q and #category- from URL without reloading
+    const url = new URL(window.location.href);
+    url.searchParams.delete("q");
+    url.hash = "";
+    router.replace(`${url.pathname}${url.search}`, { scroll: false });
   };
 
-  const tabs: Tab[] = ["all", "motorcycles", "battery", "licence", "buying", "warranty"];
+  const hasActiveFilter = tab !== "all" || query.length > 0;
 
   return (
-    <section className="bg-[#1a1a1a] text-white py-12 sm:py-20">
+    <section className="bg-white pb-12 sm:pb-16">
       <div className="container mx-auto px-4 md:px-0 max-w-5xl">
-        {/* Search bar */}
-        <div className="relative mb-6">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
-              <path d="m20 20-3.5-3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          </span>
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={c.searchPlaceholder}
-            aria-label={c.searchPlaceholder}
-            className="w-full rounded-full bg-white/5 border border-white/15 focus:border-orange-500 focus:bg-white/10 transition-colors text-white placeholder:text-gray-500 pl-12 pr-4 py-3 text-base outline-none"
-          />
-        </div>
-
-        {/* Category pills */}
-        <div className="flex flex-wrap gap-2 mb-8" role="tablist">
-          {tabs.map((t) => {
-            const label = t === "all" ? c.all : CATEGORY_LABELS[t][lang];
-            const active = tab === t;
-            return (
-              <button
-                key={t}
-                type="button"
-                role="tab"
-                aria-selected={active}
-                onClick={() => setTab(t)}
-                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium border transition-colors ${
-                  active
-                    ? "bg-orange-500 text-white border-orange-500"
-                    : "bg-transparent text-white border-white/20 hover:border-white/50"
-                }`}
-              >
-                <span>{label}</span>
-                <span
-                  className={`text-xs rounded-full px-2 py-0.5 ${
-                    active ? "bg-white/20" : "bg-white/10 text-gray-300"
-                  }`}
-                  aria-hidden="true"
-                >
-                  {counts[t]}
+        {/* Active filter indicator + clear — only shown when something is filtered */}
+        <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+          <p className="text-sm text-gray-500">
+            {c.questionsLabel(filtered.length)}
+            {tab !== "all" && (
+              <>
+                {" · "}
+                <span className="text-gray-700">
+                  {c.filteringBy}: <strong>{CATEGORY_LABELS[tab][lang]}</strong>
                 </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Results count */}
-        <p className="text-sm text-gray-400 mb-4">
-          {c.questionsLabel(filtered.length)}
-          {(query || tab !== "all") && filtered.length !== counts.all && (
-            <>
-              {" · "}
-              <button
-                type="button"
-                onClick={resetFilters}
-                className="underline hover:text-white"
-              >
-                {c.clear}
-              </button>
-            </>
-          )}
-        </p>
-
-        {/* Accordion list */}
-        {filtered.length === 0 ? (
-          <div className="rounded-lg border border-white/10 bg-white/5 p-8 text-center">
-            <p className="text-gray-300 mb-3">{c.noResults}</p>
+              </>
+            )}
+          </p>
+          {hasActiveFilter && (
             <button
               type="button"
               onClick={resetFilters}
-              className="text-orange-400 hover:text-orange-300 underline text-sm"
+              className="text-sm text-orange-500 hover:text-orange-600 underline underline-offset-2"
+            >
+              {c.clear}
+            </button>
+          )}
+        </div>
+
+        {/* Accordion list */}
+        {filtered.length === 0 ? (
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-8 text-center">
+            <p className="text-gray-600 mb-3">{c.noResults}</p>
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="text-orange-500 hover:text-orange-600 underline text-sm"
             >
               {c.clear}
             </button>
           </div>
         ) : (
-          <ul className="divide-y divide-white/10 border-y border-white/10">
+          <ul className="divide-y divide-gray-200 border-y border-gray-200">
             {filtered.map((f) => {
               const isOpen = openId === f.id;
               return (
@@ -199,7 +157,7 @@ export default function FAQBrowser() {
                   <button
                     type="button"
                     onClick={() => setOpenId(isOpen ? null : f.id)}
-                    className="w-full text-left flex items-start justify-between gap-4 py-5 hover:text-orange-400 transition-colors"
+                    className="w-full text-left flex items-start justify-between gap-4 py-5 hover:text-orange-500 transition-colors"
                     aria-expanded={isOpen}
                     aria-controls={`faq-${f.id}-panel`}
                   >
@@ -207,12 +165,12 @@ export default function FAQBrowser() {
                       <span className="inline-block text-[11px] uppercase tracking-wider text-gray-500 mb-1">
                         {CATEGORY_LABELS[f.category][lang]}
                       </span>
-                      <h3 className="text-base sm:text-lg font-medium leading-snug">
+                      <h3 className="text-base sm:text-lg font-medium text-black leading-snug">
                         {f.question}
                       </h3>
                     </div>
                     <motion.span
-                      className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/30 text-white"
+                      className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700"
                       animate={{ rotate: isOpen ? 45 : 0 }}
                       transition={{ duration: 0.2 }}
                       aria-hidden="true"
@@ -232,7 +190,7 @@ export default function FAQBrowser() {
                         transition={{ duration: 0.25 }}
                         className="overflow-hidden"
                       >
-                        <div className="pb-6 pr-10 text-sm sm:text-base text-gray-300 leading-relaxed prose prose-invert prose-sm sm:prose-base max-w-none prose-a:text-orange-400 prose-a:no-underline hover:prose-a:underline">
+                        <div className="pb-6 pr-10 text-sm sm:text-base text-gray-700 leading-relaxed prose prose-sm sm:prose-base max-w-none prose-a:text-orange-500 prose-a:no-underline hover:prose-a:underline">
                           {f.answer}
                         </div>
                       </motion.div>
