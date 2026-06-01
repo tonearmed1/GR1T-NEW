@@ -61,7 +61,9 @@ export const G1_VARIANTS: G1VariantData[] = [
       it: "Progettata per il ritmo della città. Patenti A1 / B.",
     },
     available: true,
-    heroImage: "/g1-platform/street/hero.jpg",
+    // Using existing assets from /public/grit-g1 and /Home/gallery* as placeholders
+    // so the preview deployment renders. Replace with real shots once /public/g1-platform/street/*.jpg exists.
+    heroImage: "/grit-g1/hero.jpg",
     selectorImage: "/Home/bikes/G1S.png",
     startingPrice: "€7,000 + VAT",
     reserveModelParam: "G1S",
@@ -84,9 +86,9 @@ export const G1_VARIANTS: G1VariantData[] = [
         it: "La G1S è costruita attorno al modo in cui ti muovi davvero in città. Leggera, agile, pronta per patenti A1/B nella maggior parte d'Europa. Filtra il traffico, ricarica in casa, scappa il sabato mattina. La moto sparisce sotto di te — resta solo la guida.",
       },
       images: [
-        "/g1-platform/street/lifestyle-1.jpg",
-        "/g1-platform/street/lifestyle-2.jpg",
-        "/g1-platform/street/lifestyle-3.jpg",
+        "/Home/gallery2/4.png",
+        "/Home/gallery2/5.png",
+        "/Home/gallery2/7.jpg",
       ],
     },
   },
@@ -105,7 +107,9 @@ export const G1_VARIANTS: G1VariantData[] = [
       it: "Per chi prende la strada lunga per casa. Città + sentiero.",
     },
     available: true,
-    heroImage: "/g1-platform/scrambler/hero.jpg",
+    // Using existing assets from /public/grit-g1x as placeholders. Replace with real
+    // /public/g1-platform/scrambler/*.jpg when the dedicated shoot lands.
+    heroImage: "/grit-g1x/hero.jpg",
     selectorImage: "/Home/bikes/G1X.png",
     startingPrice: "€8,000 + VAT",
     reserveModelParam: "G1X",
@@ -134,9 +138,9 @@ export const G1_VARIANTS: G1VariantData[] = [
         it: "La G1X è la stessa piattaforma con un'attitudine diversa. Più escursione, pneumatici dual-purpose, predisposta per bagagli veri, paramani per le mattine fredde. Pendola il lunedì. Sparisci sull'Appennino il venerdì. La moto non fa domande.",
       },
       images: [
-        "/g1-platform/scrambler/lifestyle-1.jpg",
-        "/g1-platform/scrambler/lifestyle-2.jpg",
-        "/g1-platform/scrambler/lifestyle-3.jpg",
+        "/grit-g1x/GR1T_off-road.1.png",
+        "/grit-g1x/orange01.jpg",
+        "/grit-g1x/orange02.jpg",
       ],
     },
   },
@@ -155,7 +159,9 @@ export const G1_VARIANTS: G1VariantData[] = [
       it: "In arrivo nel 2027. La piattaforma G1, affilata.",
     },
     available: false,
-    heroImage: "/g1-platform/race/hero-placeholder.jpg",
+    // No G1R imagery exists yet — reuse a generic platform shot. The component
+    // detects available=false and shows a "Coming 2027" treatment instead of full imagery.
+    heroImage: "/grit-g1/hero.jpg",
     selectorImage: "/Home/bikes/G1S.png", // placeholder until G1R imagery exists
     startingPrice: null,
     reserveModelParam: null,
