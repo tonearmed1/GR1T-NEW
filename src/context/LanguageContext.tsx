@@ -14,6 +14,7 @@ type TranslationKey =
   // Navigation
   | "nav.home"
   | "nav.bikes"
+  | "nav.g1series"
   | "nav.news"
   | "nav.corporate"
   | "nav.contact"
@@ -908,6 +909,7 @@ const translations: Record<Language, TranslationDict> = {
     // Navigation
     "nav.home": "Home",
     "nav.bikes": "Motorcycles",
+    "nav.g1series": "G1 Series",
     "nav.about": "About Us",
     "nav.news": "News",
     "nav.corporate": "Corporate",
@@ -1924,6 +1926,7 @@ const translations: Record<Language, TranslationDict> = {
     // Navigation
     "nav.home": "Home",
     "nav.bikes": "Moto",
+    "nav.g1series": "Serie G1",
     "nav.about": "Chi Siamo",
     "nav.news": "Notizie",
     "nav.corporate": "Azienda",

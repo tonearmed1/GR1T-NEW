@@ -16,9 +16,9 @@ import { useLanguage } from "@/context/LanguageContext";
 type Locale = "en" | "it";
 
 interface ModelData {
-  modelCode: "G1S" | "G1X";
-  modelName: string;        // "G1S Street" | "G1X Scrambler"
-  specsHref: string;        // /G1S/specs or /G1X/specs (existing routes)
+  modelCode: "G1S" | "G1X" | "G1XR";
+  modelName: string;        // "G1S Street" | "G1X Scrambler" | "G1XR Raider"
+  specsHref: string;        // /G1S/specs or /G1X/specs or /G1XR/specs (existing routes)
 }
 
 /* ───── KEY STATS strip below hero ───── */
@@ -111,24 +111,44 @@ export function ProductTwoUp({ model }: { model: ModelData }) {
   const { language } = useLanguage();
   const lang: Locale = language === "it" ? "it" : "en";
 
-  const c = {
-    en: {
-      eyebrow: "BEST-IN-CLASS PAYLOAD",
-      title: "Built for two. 190 kg of carrying capacity.",
-      body: `The ${model.modelName} is a standard two-seater with enough power and structural strength to carry two adults plus gear — up to 190 kg total. That's best-in-class for an electric 125 cm³-equivalent motorcycle.`,
-      detail1: "Frame tested for sustained two-up riding at full payload",
-      detail2: "Optional panniers + top-box rated to 10 kg each",
-      detail3: "Suspension tuned for the full 190 kg loaded weight",
-    },
-    it: {
-      eyebrow: "PORTATA BEST-IN-CLASS",
-      title: "Costruita per due. 190 kg di capacità di carico.",
-      body: `La ${model.modelName} è una vera due posti, con potenza e struttura sufficienti per due adulti più bagagli — fino a 190 kg totali. Una portata best-in-class per una moto elettrica equivalente 125 cm³.`,
-      detail1: "Telaio testato per uso continuo in due al carico massimo",
-      detail2: "Borse laterali + topcase opzionali fino a 10 kg ciascuno",
-      detail3: "Sospensioni calibrate per il pieno carico di 190 kg",
-    },
-  }[lang];
+  const isG1XR = model.modelCode === "G1XR";
+  const c = isG1XR
+    ? {
+        en: {
+          eyebrow: "UTILITY MEETS PRECISION",
+          title: "Utility Meets Precision.",
+          body: "The G1XR Raider is built for those who push the boundaries. Reinforced frame, auxiliary lighting, rack system — this is the G1 Series for riders who mean business.",
+          detail1: "Auxiliary lighting for demanding conditions",
+          detail2: "Utility rack system for cargo and accessories",
+          detail3: "Mixed surface tyres for versatile terrain handling",
+        },
+        it: {
+          eyebrow: "UTILITÀ INCONTRA PRECISIONE",
+          title: "Utilità Incontra Precisione.",
+          body: "La G1XR Raider è costruita per chi spinge oltre i limiti. Telaio rinforzato, illuminazione ausiliaria, sistema di portabagagli — questa è la G1 Series per chi fa sul serio.",
+          detail1: "Illuminazione ausiliaria per condizioni difficili",
+          detail2: "Sistema di portabagagli per carichi e accessori",
+          detail3: "Pneumatici misti per una guida versatile su ogni terreno",
+        },
+      }[lang]
+    : {
+        en: {
+          eyebrow: "BEST-IN-CLASS PAYLOAD",
+          title: "Built for two. 190 kg of carrying capacity.",
+          body: `The ${model.modelName} is a standard two-seater with enough power and structural strength to carry two adults plus gear — up to 190 kg total. That's best-in-class for an electric 125 cm³-equivalent motorcycle.`,
+          detail1: "Frame tested for sustained two-up riding at full payload",
+          detail2: "Optional panniers + top-box rated to 10 kg each",
+          detail3: "Suspension tuned for the full 190 kg loaded weight",
+        },
+        it: {
+          eyebrow: "PORTATA BEST-IN-CLASS",
+          title: "Costruita per due. 190 kg di capacità di carico.",
+          body: `La ${model.modelName} è una vera due posti, con potenza e struttura sufficienti per due adulti più bagagli — fino a 190 kg totali. Una portata best-in-class per una moto elettrica equivalente 125 cm³.`,
+          detail1: "Telaio testato per uso continuo in due al carico massimo",
+          detail2: "Borse laterali + topcase opzionali fino a 10 kg ciascuno",
+          detail3: "Sospensioni calibrate per il pieno carico di 190 kg",
+        },
+      }[lang];
 
   return (
     <section className="bg-[#1a1a1a] text-white py-16 sm:py-24">

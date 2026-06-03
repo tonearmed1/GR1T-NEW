@@ -39,16 +39,13 @@ const Header = () => {
   //   Quality top-level (folded under About). Corporate (B2B audiences) moved to footer only.
   // - Reserve is rendered separately as the primary CTA button (right side).
   const navigationLinks = [
-    // TEMPORARY (redesign-g1-platform branch only): expose the unreleased
-    // /motorcycles/g1 preview so reviewers can find it. Remove this entry before
-    // merging to main — or keep it under the Motorcycles dropdown as the new
-    // canonical "G1 Platform" link once the cutover plan is approved.
-    { label: "★ G1 Platform Preview", href: "/motorcycles/g1" },
     {
-      label: t("nav.bikes"),
+      label: t("nav.g1series"),
+      href: "/motorcycles/g1",
       children: [
-        { label: t("founders.bikes.g1s.title"), href: "/G1S" },
-        { label: t("founders.bikes.g1x.title"), href: "/G1X" },
+        { label: "G1S Street", href: "/G1S" },
+        { label: "G1X Scrambler", href: "/G1X" },
+        { label: "G1XR Raider", href: "/G1XR" },
       ],
     },
     {
