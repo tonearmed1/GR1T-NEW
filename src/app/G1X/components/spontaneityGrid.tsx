@@ -2,9 +2,9 @@
 
 const CARDS = [
   { title: "The Long Way Home", desc: "Choosing the road you normally ignore. Urban shortcuts redefined.", img: "/grit-g1x/GR1T_off-road.1.png" },
-  { title: "Beyond The Pavement", desc: "Gravel roads and forgotten routes. Silence is the new soundtrack.", img: "/grit-g1x/orange01.jpg" },
-  { title: "Weekend Explorer", desc: "Leaving the city behind. Fast-charging your curiosity.", img: "/grit-g1x/orange02.jpg" },
-  { title: "City Then Country", desc: "Built for commuting. Ready for more. The ultimate dual-purpose tool.", img: "/grit-g1x/hero.jpg" },
+  { title: "Beyond The Pavement", desc: "Gravel roads and forgotten routes. Silence is the new soundtrack.", img: "/grit-g1x/orange01.webp" },
+  { title: "Weekend Explorer", desc: "Leaving the city behind. Fast-charging your curiosity.", img: "/grit-g1x/orange02.webp" },
+  { title: "City Then Country", desc: "Built for commuting. Ready for more. The ultimate dual-purpose tool.", img: "/grit-g1x/hero.webp" },
 ];
 
 export default function SpontaneityGrid() {

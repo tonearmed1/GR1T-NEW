@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const COLORS = [
-  { name: "Stealth Black", img: "/grit-g1/hero.jpg" },
-  { name: "Technical Grey", img: "/grit-g1x/hero.jpg" },
+  { name: "Stealth Black", img: "/grit-g1/hero.webp" },
+  { name: "Technical Grey", img: "/grit-g1x/hero.webp" },
   { name: "Forest Green", img: "/grit-g1/01_g1s.png" },
 ];
 

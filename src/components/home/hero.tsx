@@ -18,7 +18,7 @@ export default function Hero() {
           muted
           playsInline
           className="w-full h-full object-cover"
-          poster="/grit-g1/hero.jpg"
+          poster="/grit-g1/hero.webp"
         >
           <source src="/Home/GR1T Website HERO Video.mp4" type="video/mp4" />
         </video>

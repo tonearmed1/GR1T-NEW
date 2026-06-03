@@ -68,7 +68,7 @@ const G1SGallery = () => {
             >
               <div className="relative w-full h-full">
                 <Image
-                  src="/Home/gallery2/7.jpg"
+                  src="/Home/gallery2/7.webp"
                   alt="Top view"
                   fill
                   sizes="(max-width: 768px) 100vw, 66vw"

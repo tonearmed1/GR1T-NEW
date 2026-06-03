@@ -4,13 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 const slides = [
-  { src: "/insta/DSC09277.jpg", caption: "" },
-  { src: "/insta/DSC09786.jpg", caption: "" },
+  { src: "/insta/DSC09277.webp", caption: "" },
+  { src: "/insta/DSC09786.webp", caption: "" },
   { src: "/insta/582524486_17969954885975835_4701173643443028079_n.jpeg", caption: "" },
   { src: "/insta/583038479_17969954717975835_5830481309611677992_n.jpeg", caption: "" },
   { src: "/insta/583288409_17969954726975835_5105729800801945357_n.jpeg", caption: "" },
-  { src: "/insta/575707898_17968953869975835_3799456203592499690_n.jpg", caption: "" },
-  { src: "/insta/579640737_17968953809975835_8771644436581467461_n.jpg", caption: "" },
+  { src: "/insta/575707898_17968953869975835_3799456203592499690_n.webp", caption: "" },
+  { src: "/insta/579640737_17968953809975835_8771644436581467461_n.webp", caption: "" },
 ];
 
 const Insta = () => {

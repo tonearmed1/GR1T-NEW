@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 const COLORS = [
-  { name: "Stealth Black", subtitle: "Matte Finish", img: "/grit-g1x/hero.jpg" },
+  { name: "Stealth Black", subtitle: "Matte Finish", img: "/grit-g1x/hero.webp" },
   { name: "Technical Grey", subtitle: "Satin Finish", img: "/grit-g1x/01_g1x.png" },
   { name: "Forest Green", subtitle: "Earth Edition", img: "/grit-g1x/02_g1x.png" },
 ];

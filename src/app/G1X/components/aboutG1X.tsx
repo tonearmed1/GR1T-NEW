@@ -8,7 +8,7 @@ export default function AboutG1X() {
       <div className="max-w-[1440px] mx-auto px-5 md:px-20 grid md:grid-cols-2 items-center gap-20">
         <div className="order-2 md:order-1">
           <Image
-            src="/grit-g1x/hero.jpg"
+            src="/grit-g1x/hero.webp"
             alt="G1X Lifestyle"
             width={900}
             height={700}

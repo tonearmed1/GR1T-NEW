@@ -16,7 +16,7 @@ export default function G1XHero() {
   return (
     <header className="relative h-screen min-h-[800px] flex items-center overflow-hidden">
       <Image
-        src="/grit-g1x/hero.jpg"
+        src="/grit-g1x/hero.webp"
         alt="G1X Scrambler Hero"
         fill
         className="object-cover z-0 brightness-[0.75]"

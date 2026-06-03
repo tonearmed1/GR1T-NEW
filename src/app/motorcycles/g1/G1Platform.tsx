@@ -20,21 +20,21 @@ const MODELS: Record<ModelKey, ModelData> = {
     price: "€7,000",
     desc: "Urban. Refined. Everyday freedom.",
     href: "/G1S",
-    img: "/grit-g1/hero.jpg",
+    img: "/grit-g1/hero.webp",
   },
   scrambler: {
     name: "G1X Scrambler",
     price: "€8,000",
     desc: "Versatile. Explorative. Off-road capable.",
     href: "/G1X",
-    img: "/grit-g1x/hero.jpg",
+    img: "/grit-g1x/hero.webp",
   },
   raider: {
     name: "G1XR Raider",
     price: "€9,000",
     desc: "Purposeful. Capable. Built for adventure.",
     href: "/G1XR",
-    img: "/grit-g1/hero.jpg",
+    img: "/grit-g1/hero.webp",
   },
 };
 
@@ -64,16 +64,16 @@ const FEATURE_PANELS: Record<FeaturePanelKey, FeaturePanel> = {
 };
 
 const FINISH_CARDS = [
-  { name: "Stealth Black", subtitle: "Matte Powder Coat", img: "/grit-g1/hero.jpg" },
-  { name: "Technical Grey", subtitle: "Satin Finish", img: "/grit-g1x/hero.jpg" },
-  { name: "Forest Green", subtitle: "Deep Earth Tone", img: "/grit-g1/hero.jpg" },
+  { name: "Stealth Black", subtitle: "Matte Powder Coat", img: "/grit-g1/hero.webp" },
+  { name: "Technical Grey", subtitle: "Satin Finish", img: "/grit-g1x/hero.webp" },
+  { name: "Forest Green", subtitle: "Deep Earth Tone", img: "/grit-g1/hero.webp" },
 ];
 
 const ECOSYSTEM_CARDS = [
-  { title: "Passenger Setup", subtitle: "Comfort for two.", img: "/grit-g1/hero.jpg" },
-  { title: "Touring Kit", subtitle: "Long range comfort.", img: "/grit-g1x/hero.jpg" },
-  { title: "Rear Rack System", subtitle: "Everyday practicality.", img: "/grit-g1/hero.jpg" },
-  { title: "Urban Utility Pack", subtitle: "Storage and carrying solutions for daily life.", img: "/grit-g1x/hero.jpg" },
+  { title: "Passenger Setup", subtitle: "Comfort for two.", img: "/grit-g1/hero.webp" },
+  { title: "Touring Kit", subtitle: "Long range comfort.", img: "/grit-g1x/hero.webp" },
+  { title: "Rear Rack System", subtitle: "Everyday practicality.", img: "/grit-g1/hero.webp" },
+  { title: "Urban Utility Pack", subtitle: "Storage and carrying solutions for daily life.", img: "/grit-g1x/hero.webp" },
 ];
 
 const TESTIMONIALS = [
@@ -281,7 +281,7 @@ export default function G1Platform({ initialVariant }: { initialVariant: string 
             </div>
           </div>
           <div className="order-1 lg:order-2 relative aspect-[4/3]">
-            <Image src="/grit-g1/hero.jpg" alt="G1 Platform" fill className="object-contain brightness-90 contrast-125" />
+            <Image src="/grit-g1/hero.webp" alt="G1 Platform" fill className="object-contain brightness-90 contrast-125" />
           </div>
         </div>
       </section>
@@ -292,7 +292,7 @@ export default function G1Platform({ initialVariant }: { initialVariant: string 
           <div className="grid lg:grid-cols-12 gap-16 items-center">
             <div className="lg:col-span-7">
               <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
-                <Image src="/grit-g1/hero.jpg" alt="Motor Valley Factory" fill className="object-cover" />
+                <Image src="/grit-g1/hero.webp" alt="Motor Valley Factory" fill className="object-cover" />
                 <div className="absolute inset-0 bg-black/10" />
               </div>
             </div>
@@ -366,7 +366,7 @@ export default function G1Platform({ initialVariant }: { initialVariant: string 
       {/* ── FINAL CTA ── */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-black/50 z-10" />
-        <Image src="/grit-g1/hero.jpg" alt="Reserve Your G1" fill className="object-cover scale-105" />
+        <Image src="/grit-g1/hero.webp" alt="Reserve Your G1" fill className="object-cover scale-105" />
         <div className="relative z-20 text-center text-white px-5 max-w-5xl mx-auto">
           <h2 className="font-britti font-bold text-[40px] md:text-[80px] leading-tight mb-8 tracking-tight">
             Become Part Of The Founding Generation.

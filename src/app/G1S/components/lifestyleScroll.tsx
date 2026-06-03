@@ -3,11 +3,11 @@
 import Image from "next/image";
 
 const LIFESTYLES = [
-  { title: "Urban Freedom", desc: "Daily commuting and city exploration.", img: "/grit-g1/hero.jpg" },
-  { title: "Weekend Escape", desc: "Light touring and spontaneous adventures.", img: "/grit-g1x/hero.jpg" },
+  { title: "Urban Freedom", desc: "Daily commuting and city exploration.", img: "/grit-g1/hero.webp" },
+  { title: "Weekend Escape", desc: "Light touring and spontaneous adventures.", img: "/grit-g1x/hero.webp" },
   { title: "Passenger Ready", desc: "Comfortable two-up riding with extended seating.", img: "/grit-g1/01_g1s.png" },
   { title: "Cargo & Utility", desc: "Practical everyday carrying capability.", img: "/grit-g1/02_g1s.png" },
-  { title: "Touring Setup", desc: "Long-distance capability with integrated luggage solutions.", img: "/grit-g1x/hero.jpg" },
+  { title: "Touring Setup", desc: "Long-distance capability with integrated luggage solutions.", img: "/grit-g1x/hero.webp" },
 ];
 
 export default function LifestyleScroll() {

@@ -17,19 +17,19 @@ const PLATFORM_STORIES: Record<PlatformKey, PlatformStory> = {
     label: "G1S STREET",
     title: "Urban Refinement",
     desc: "Urban. Refined. Built for everyday riding with agility, style and practicality.",
-    img: "/grit-g1/hero.jpg",
+    img: "/grit-g1/hero.webp",
   },
   scrambler: {
     label: "G1X SCRAMBLER",
     title: "Versatile Exploration",
     desc: "Versatile. Explorative. Designed for riders who want freedom beyond the city.",
-    img: "/grit-g1x/hero.jpg",
+    img: "/grit-g1x/hero.webp",
   },
   raider: {
     label: "G1XR RAIDER",
     title: "Purposeful Capability",
     desc: "Purposeful. Capable. Built for riders carrying more, travelling farther and doing more.",
-    img: "/grit-g1/hero.jpg",
+    img: "/grit-g1/hero.webp",
   },
 };
 
