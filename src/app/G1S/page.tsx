@@ -2,14 +2,12 @@ import React from "react";
 import type { Metadata } from "next";
 import G1SHero from "./components/hero";
 import AboutG1S from "./components/aboutG1S";
+import ColorScroll from "./components/colorScroll";
+import LifestyleScroll from "./components/lifestyleScroll";
 import Threesixty from "./components/threesixty";
 import G1SGallery from "./components/g1sGallery";
 import {
   ProductKeyStats,
-  ProductVideoStrip,
-  ProductTwoUp,
-  ProductTestimonials,
-  ProductSimplifiedSpecs,
   ProductReserveCTA,
 } from "@/components/product/ProductSections";
 
@@ -72,19 +70,13 @@ const G1SPage = () => {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
-      {/* New product page structure (rebuild May 2026):
-          hero (shorter) → key stats with 190 kg highlighted → video strip → description →
-          two-up spotlight → 360 view → gallery → testimonials → simplified specs → reserve CTA.
-          Full detailed specs page still lives at /G1S/specs (linked from ProductSimplifiedSpecs). */}
       <G1SHero />
       <ProductKeyStats model={G1S_MODEL} />
-      <ProductVideoStrip model={G1S_MODEL} />
       <AboutG1S />
-      <ProductTwoUp model={G1S_MODEL} />
+      <ColorScroll />
+      <LifestyleScroll />
       <Threesixty />
       <G1SGallery />
-      <ProductTestimonials model={G1S_MODEL} />
-      <ProductSimplifiedSpecs model={G1S_MODEL} />
       <ProductReserveCTA model={G1S_MODEL} />
     </>
   );

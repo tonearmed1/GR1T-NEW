@@ -2,14 +2,13 @@ import React from "react";
 import type { Metadata } from "next";
 import G1XHero from "./components/hero";
 import AboutG1X from "./components/aboutG1X";
+import TechSpecs from "./components/techSpecs";
+import ColorScroll from "./components/colorScroll";
+import SpontaneityGrid from "./components/spontaneityGrid";
 import ThreesixtyG1X from "./components/threesixty";
 import G1XGallery from "./components/g1xGallery";
 import {
   ProductKeyStats,
-  ProductVideoStrip,
-  ProductTwoUp,
-  ProductTestimonials,
-  ProductSimplifiedSpecs,
   ProductReserveCTA,
 } from "@/components/product/ProductSections";
 
@@ -62,16 +61,14 @@ const G1XPage = () => {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
-      {/* Mirrors the G1S product page structure — same shared sections, G1X-specific data. */}
       <G1XHero />
       <ProductKeyStats model={G1X_MODEL} />
-      <ProductVideoStrip model={G1X_MODEL} />
       <AboutG1X />
-      <ProductTwoUp model={G1X_MODEL} />
+      <TechSpecs />
+      <ColorScroll />
+      <SpontaneityGrid />
       <ThreesixtyG1X />
       <G1XGallery />
-      <ProductTestimonials model={G1X_MODEL} />
-      <ProductSimplifiedSpecs model={G1X_MODEL} />
       <ProductReserveCTA model={G1X_MODEL} />
     </>
   );
