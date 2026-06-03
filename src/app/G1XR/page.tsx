@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "The most purposeful motorcycle in the G1 family. 150 km range, 130 km/h, two removable batteries.",
     url: `${BASE}/G1XR`,
-    images: [{ url: `${BASE}/grit-g1xr/hero.jpg`, width: 1200, height: 630, alt: "GR1T G1XR Raider motorcycle" }],
+    images: [{ url: `${BASE}/grit-g1xr/hero.webp`, width: 1200, height: 630, alt: "GR1T G1XR Raider motorcycle" }],
   },
 };
 
@@ -40,7 +40,7 @@ const productSchema = {
   "@type": "Product",
   name: "GR1T G1XR Raider",
   brand: { "@type": "Brand", name: "GR1T Motorcycles" },
-  image: `${BASE}/grit-g1xr/hero.jpg`,
+  image: `${BASE}/grit-g1xr/hero.webp`,
   description:
     "The GR1T G1XR Raider is the most purposeful motorcycle in the G1 family — rugged, utilitarian, built for riders who demand more from their machine. 150 km range, 130 km/h, two removable batteries.",
   offers: {

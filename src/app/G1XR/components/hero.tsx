@@ -9,7 +9,7 @@ const G1XRHero = () => {
       {/* Hero Image Background */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/grit-g1xr/hero.jpg"
+          src="/grit-g1xr/hero.webp"
           alt="GR1T G1XR Raider Hero"
           fill
           className="object-cover grayscale"

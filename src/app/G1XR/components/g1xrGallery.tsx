@@ -26,7 +26,7 @@ const G1XRGallery = () => {
             >
               <div className="relative w-full h-full">
                 <Image
-                  src="/grit-g1xr/gallery-1.jpg"
+                  src="/grit-g1xr/gallery-1.webp"
                   alt="G1XR Raider gallery close-up"
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
@@ -46,7 +46,7 @@ const G1XRGallery = () => {
             >
               <div className="relative w-full h-full">
                 <Image
-                  src="/grit-g1xr/gallery-2.jpg"
+                  src="/grit-g1xr/gallery-2.webp"
                   alt="G1XR Raider top view"
                   fill
                   sizes="(max-width: 768px) 100vw, 66vw"
@@ -68,7 +68,7 @@ const G1XRGallery = () => {
             >
               <div className="relative w-full h-full">
                 <Image
-                  src="/grit-g1xr/gallery-3.jpg"
+                  src="/grit-g1xr/gallery-3.webp"
                   alt="G1XR Raider wide view"
                   fill
                   sizes="(max-width: 768px) 100vw, 66vw"
@@ -88,7 +88,7 @@ const G1XRGallery = () => {
             >
               <div className="relative w-full h-full">
                 <Image
-                  src="/grit-g1xr/gallery-4.jpg"
+                  src="/grit-g1xr/gallery-4.webp"
                   alt="G1XR Raider detail"
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
@@ -112,7 +112,7 @@ const G1XRGallery = () => {
             >
               <div className="relative w-full aspect-[2/3] md:aspect-[2/3]">
                 <Image
-                  src="/grit-g1xr/gallery-5.jpg"
+                  src="/grit-g1xr/gallery-5.webp"
                   alt="G1XR Raider portrait"
                   fill
                   sizes="(max-width: 768px) 100vw, 35vw"
@@ -132,7 +132,7 @@ const G1XRGallery = () => {
             >
               <div className="relative w-full aspect-[16/10] md:aspect-[16/8] max-h-[80%] md:max-h-[95%]">
                 <Image
-                  src="/grit-g1xr/gallery-6.jpg"
+                  src="/grit-g1xr/gallery-6.webp"
                   alt="G1XR Raider wide shot"
                   fill
                   sizes="(max-width: 768px) 100vw, 55vw"
