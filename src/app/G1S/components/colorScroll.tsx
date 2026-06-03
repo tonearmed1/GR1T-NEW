@@ -20,10 +20,7 @@ export default function ColorScroll() {
               Every rider is different. Choose from curated finishes or work with us to create a motorcycle that is uniquely yours.
             </p>
           </div>
-          <Link
-            href="/contact"
-            className="border border-white text-white text-sm font-medium px-10 py-4 uppercase tracking-widest hover:bg-grit-orange hover:border-grit-orange transition-all duration-300 flex-shrink-0"
-          >
+          <Link href="/contact" className="btn btn-secondary-light flex-shrink-0">
             Start Configuring
           </Link>
         </div>

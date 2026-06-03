@@ -314,14 +314,8 @@ export function ProductSimplifiedSpecs({ model }: { model: ModelData }) {
               {c.title}
             </h2>
           </div>
-          <Link
-            href={model.specsHref}
-            className="inline-flex items-center gap-2 rounded-full bg-black text-white hover:bg-orange-500 px-6 py-3 text-sm font-semibold transition-colors self-start"
-          >
+          <Link href={model.specsHref} className="btn btn-secondary self-start">
             {c.explore}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
           </Link>
         </div>
 
@@ -372,10 +366,7 @@ export function ProductReserveCTA({ model }: { model: ModelData }) {
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">{c.eyebrow}</p>
         <h2 className="mt-3 text-3xl sm:text-5xl font-britti font-bold leading-tight">{c.title}</h2>
         <p className="mt-4 text-base sm:text-lg text-white/80">{c.sub}</p>
-        <Link
-          href="/reserve"
-          className="mt-8 inline-flex items-center gap-2 rounded-full bg-orange-500 hover:bg-orange-600 px-7 py-4 text-base md:text-lg font-semibold text-white shadow-sm transition-colors"
-        >
+        <Link href="/reserve" className="btn btn-accent mt-8">
           {c.cta}
         </Link>
       </div>

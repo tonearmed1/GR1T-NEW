@@ -34,13 +34,10 @@ export default function G1XHero() {
           </p>
           <div className="flex flex-wrap gap-4 items-center">
             <span className="text-2xl font-semibold text-white mr-4">€8,000</span>
-            <Link
-              href="/checkout"
-              className="bg-white text-black px-10 py-5 text-sm font-medium hover:bg-grit-orange hover:text-white transition-all duration-300"
-            >
+            <Link href="/checkout" className="btn btn-secondary-light">
               Reserve Yours
             </Link>
-            <button className="border border-white text-white px-10 py-5 text-sm font-medium hover:bg-white hover:text-black transition-all duration-300">
+            <button className="btn btn-secondary-light">
               Download Specifications
             </button>
           </div>

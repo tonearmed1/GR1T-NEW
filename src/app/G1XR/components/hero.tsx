@@ -45,19 +45,10 @@ const G1XRHero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/reserve?model=G1XR"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 hover:bg-orange-600 px-7 py-4 text-base font-semibold text-white shadow-sm transition-colors"
-            >
+            <Link href="/reserve?model=G1XR" className="btn btn-secondary-light">
               Reserve Yours
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
             </Link>
-            <a
-              href="/G1XR/specs"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/60 hover:border-white px-7 py-4 text-base font-semibold text-white transition-colors"
-            >
+            <a href="/G1XR/specs" className="btn btn-secondary-light">
               Download Specifications
             </a>
           </div>

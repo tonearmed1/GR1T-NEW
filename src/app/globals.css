@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-/* Britti Sans Font Declaration */
+/* ─── Britti Sans — brand headline font ─── */
 @font-face {
   font-family: "Britti Sans";
   src:
-    url("/fonts/Britti-sans font/britti-sans-regular-webfont-full/webfonts/britti-sans-regular.ttf") format("truetype"),
+    url("/fonts/Britti-sans font/britti-sans-regular-webfont-full/webfonts/britti-sans-regular.woff2") format("woff2"),
     url("/fonts/Britti-sans font/britti-sans-regular-webfont-full/webfonts/britti-sans-regular.woff") format("woff"),
-    url("/fonts/Britti-sans font/britti-sans-regular-webfont-full/webfonts/britti-sans-regular.woff2") format("woff2");
-  font-weight: normal;
+    url("/fonts/Britti-sans font/britti-sans-regular-webfont-full/webfonts/britti-sans-regular.ttf") format("truetype");
+  font-weight: 300 400;
   font-style: normal;
   font-display: swap;
 }
@@ -15,32 +15,10 @@
 @font-face {
   font-family: "Britti Sans";
   src:
-    url("/fonts/Britti-sans font/britti-sans-medium-webfont-full/webfonts/britti-sans-medium.ttf") format("truetype"),
+    url("/fonts/Britti-sans font/britti-sans-medium-webfont-full/webfonts/britti-sans-medium.woff2") format("woff2"),
     url("/fonts/Britti-sans font/britti-sans-medium-webfont-full/webfonts/britti-sans-medium.woff") format("woff"),
-    url("/fonts/Britti-sans font/britti-sans-medium-webfont-full/webfonts/britti-sans-medium.woff2") format("woff2");
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Britti Sans";
-  src:
-    url("/fonts/Britti-sans font/britti-sans-regular-webfont-full/webfonts/britti-sans-regular.ttf") format("truetype"),
-    url("/fonts/Britti-sans font/britti-sans-regular-webfont-full/webfonts/britti-sans-regular.woff") format("woff"),
-    url("/fonts/Britti-sans font/britti-sans-regular-webfont-full/webfonts/britti-sans-regular.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Britti Sans";
-  src:
-    url("/fonts/Britti-sans font/britti-sans-medium-webfont-full/webfonts/britti-sans-medium.ttf") format("truetype"),
-    url("/fonts/Britti-sans font/britti-sans-medium-webfont-full/webfonts/britti-sans-medium.woff") format("woff"),
-    url("/fonts/Britti-sans font/britti-sans-medium-webfont-full/webfonts/britti-sans-medium.woff2") format("woff2");
-  font-weight: 600;
+    url("/fonts/Britti-sans font/britti-sans-medium-webfont-full/webfonts/britti-sans-medium.ttf") format("truetype");
+  font-weight: 500 900;
   font-style: normal;
   font-display: swap;
 }
@@ -48,45 +26,106 @@
 :root {
   --font-britti: "Britti Sans", Arial, sans-serif;
   --background: #ffffff;
-  --foreground: #171717;
-  --fold-color: #d6d3d1; /* stone-300 for the fold effect */
-  --fold-shadow: #a8a29e; /* stone-400 for the fold shadow */
-  --font-custom: "Britti Sans", Arial, sans-serif;
+  --foreground: #000000;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-custom);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Body = Inter (brand body font), headings = Britti Sans */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-custom);
+  font-family: var(--font-inter), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* tune these if you like */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-britti);
+}
+
+/* .font-britti utility — used on headlines in Tailwind classes */
+.font-britti {
+  font-family: var(--font-britti) !important;
+}
+
+/* ─── Brand Button System ─── */
+/* All buttons: sharp corners, uppercase, tracked */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  font-family: var(--font-britti);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+  white-space: nowrap;
+}
+
+/* Primary: solid black → orange on hover */
+.btn-primary {
+  background-color: #000000;
+  color: #ffffff;
+  border: 2px solid #000000;
+}
+.btn-primary:hover {
+  background-color: #f57423;
+  border-color: #f57423;
+}
+
+/* Secondary: transparent, black border → filled black on hover */
+.btn-secondary {
+  background-color: transparent;
+  color: #000000;
+  border: 2px solid #000000;
+}
+.btn-secondary:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Secondary light: for use on dark backgrounds */
+.btn-secondary-light {
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+.btn-secondary-light:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Accent: orange CTA */
+.btn-accent {
+  background-color: #f57423;
+  color: #ffffff;
+  border: 2px solid #f57423;
+}
+.btn-accent:hover {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+/* ─── card-notched utility (kept from original) ─── */
 :root {
-  --notch: 20px; /* size of the clipped corner */
-  --page-bg: #ffffff; /* color behind the card (match your page) */
-  --card-border: #d6d3d1; /* Tailwind stone-300 */
+  --notch: 20px;
+  --page-bg: #ffffff;
+  --card-border: #d6d3d1;
 }
 
-/* base card */
 .card-notched {
   position: relative;
 }
 
-/* 1) Punch the corner out by covering it with the page background */
 .card-notched::after {
   content: "";
   position: absolute;
@@ -94,21 +133,20 @@ body {
   right: 0;
   width: var(--notch);
   height: var(--notch);
-  background: var(--page-bg); /* <-- set this to your page bg */
-  clip-path: polygon(100% 0, 100% 100%, 0 0); /* little triangle */
+  background: var(--page-bg);
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
   pointer-events: none;
 }
 
-/* 2) Draw the diagonal border line of the “ear” */
 .card-notched::before {
   content: "";
   position: absolute;
   top: 0;
   right: 0;
-  height: 1px; /* border thickness */
-  width: calc(var(--notch) * 1.41421356); /* length = notch * √2 */
+  height: 1px;
+  width: calc(var(--notch) * 1.41421356);
   background: var(--card-border);
-  transform: translate(calc(-0.7071 * var(--notch)), /* -notch/√2 */ calc(0.7071 * var(--notch)) /*  notch/√2 */) rotate(45deg);
+  transform: translate(calc(-0.7071 * var(--notch)), calc(0.7071 * var(--notch))) rotate(45deg);
   transform-origin: top right;
   pointer-events: none;
 }

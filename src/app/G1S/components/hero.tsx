@@ -36,13 +36,10 @@ export default function G1SHero() {
           <p className="text-2xl font-semibold text-white">Designed for the city. Built for everywhere else.</p>
           <p className="text-2xl font-semibold text-white/80">€7,000</p>
           <div className="flex flex-wrap gap-4 pt-4">
-            <Link
-              href="/checkout"
-              className="bg-white text-black text-sm font-medium px-10 py-4 uppercase tracking-widest hover:bg-grit-orange hover:text-white transition-all duration-300"
-            >
+            <Link href="/checkout" className="btn btn-secondary-light">
               Reserve Yours
             </Link>
-            <button className="border border-white text-white text-sm font-medium px-10 py-4 uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+            <button className="btn btn-secondary-light">
               Download Specifications
             </button>
           </div>

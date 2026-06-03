@@ -15,6 +15,7 @@ module.exports = {
       },
       fontFamily: {
         britti: ["Britti Sans", "Arial", "sans-serif"],
+        inter: ["var(--font-inter)", "Arial", "sans-serif"],
       },
       colors: {
         "grit-orange": "#F57423",

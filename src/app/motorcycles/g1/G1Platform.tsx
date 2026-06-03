@@ -157,10 +157,10 @@ export default function G1Platform({ initialVariant }: { initialVariant: string 
             </div>
             <p className="text-lg text-outline mb-8">{model.desc}</p>
             <div className="flex gap-4">
-              <Link href="/checkout" className="bg-black text-white px-12 py-5 text-sm font-medium uppercase tracking-widest hover:bg-grit-orange transition-all duration-300">
+              <Link href="/checkout" className="btn btn-accent">
                 Reserve Yours
               </Link>
-              <Link href={model.href} className="border border-outline text-black px-12 py-5 text-sm font-medium uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300">
+              <Link href={model.href} className="btn btn-secondary">
                 Explore Model
               </Link>
             </div>
@@ -336,7 +336,7 @@ export default function G1Platform({ initialVariant }: { initialVariant: string 
             ))}
           </div>
           <div className="mt-12 text-center">
-            <button className="border border-black px-12 py-5 text-sm font-medium uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300">
+            <button className="btn btn-secondary">
               Download Full Spec Sheet
             </button>
           </div>
@@ -356,7 +356,7 @@ export default function G1Platform({ initialVariant }: { initialVariant: string 
             ))}
           </div>
           <div className="text-center">
-            <Link href="/faqs" className="bg-black text-white px-12 py-5 text-sm font-medium uppercase tracking-widest hover:bg-grit-orange transition-all inline-block">
+            <Link href="/faqs" className="btn btn-primary">
               View All FAQs
             </Link>
           </div>
@@ -375,10 +375,10 @@ export default function G1Platform({ initialVariant }: { initialVariant: string 
             Reserve your place among the first riders to experience the G1 Series.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link href="/checkout" className="bg-grit-orange text-white px-14 py-6 text-sm font-medium uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-500">
+            <Link href="/checkout" className="btn btn-accent px-14 py-6">
               Reserve Your G1
             </Link>
-            <Link href="/contact" className="border border-white/50 text-white px-14 py-6 text-sm font-medium uppercase tracking-[0.2em] hover:bg-white hover:text-black backdrop-blur-sm transition-all duration-500">
+            <Link href="/contact" className="btn btn-secondary-light px-14 py-6">
               Join the Mailing List
             </Link>
           </div>
