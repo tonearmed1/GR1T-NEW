@@ -1,68 +1,33 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
-import heroImg from "../../../../public/grit-g1x/01_g1x.png";
 
-import Link from "next/link";
-import { useLanguage } from "@/context/LanguageContext";
-
-const AboutG1X = () => {
-  const { t } = useLanguage();
+export default function AboutG1X() {
   return (
-    <section className="bg-white py-12 sm:py-16">
-      <div className="container mx-auto px-4 md:px-0 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Text Column */}
-          <div className="lg:col-span-6">
-            <h1 className="text-black font-bold leading-tight text-2xl sm:text-3xl lg:text-4xl">
-              {t("g1x.about.header.line1")}
-              <br />
-              {t("g1x.about.header.line2")}
-              <br />
-              {t("g1x.about.header.line3")}
-              <br />
-              {t("g1x.about.header.line4")}
-            </h1>
-
-            <p className="mt-6 text-gray-800 max-w-xl text-lg">{t("g1x.about.description")}</p>
-            <div className="mt-6">
-              <Link href="/checkout?model=G1X" className="inline-flex items-center rounded-full bg-black text-white px-5 py-3">
-                <span className="mr-3">{t("common.reserveNow")}</span>
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-4 w-4"
-                    aria-hidden="true"
-                  >
-                    <path d="M13.172 12l-4.95 4.95 1.414 1.414L16 12l-6.364-6.364-1.414 1.414z" />
-                  </svg>
-                </span>
-              </Link>
-            </div>
-          </div>
-
-          {/* Image Column */}
-          <div className="lg:col-span-6">
-            <div className="relative w-full h-[380px] sm:h-[420px] lg:h-[520px] rounded-xl overflow-hidden">
-              <Image
-                src={heroImg}
-                alt="GR1T G1X side panel close-up"
-                fill
-                className="object-contain object-center"
-                priority
-                placeholder="blur"
-                quality={90}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw"
-              />
-            </div>
-          </div>
+    <section className="py-40 bg-surface">
+      <div className="max-w-[1440px] mx-auto px-5 md:px-20 grid md:grid-cols-2 items-center gap-20">
+        <div className="order-2 md:order-1">
+          <Image
+            src="/grit-g1x/hero.webp"
+            alt="G1X Lifestyle"
+            width={900}
+            height={700}
+            className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+          />
+        </div>
+        <div className="order-1 md:order-2">
+          <span className="text-grit-orange text-xs font-bold uppercase tracking-[0.2em] mb-4 block">Manifesto</span>
+          <h2 className="font-britti font-bold text-4xl md:text-5xl mb-8 leading-tight">
+            Built For The Roads Between Destinations.
+          </h2>
+          <p className="text-lg text-on-surface-variant max-w-lg mb-8 leading-relaxed">
+            Modern life is a sequence of endpoints. We engineered the G1X to reclaim the spaces in between, for the spontaneous escapes where asphalt ends and curiosity begins.
+          </p>
+          <p className="text-lg text-on-surface-variant max-w-lg leading-relaxed">
+            Reclaim your freedom. Every trail is an invitation to leave the predictable behind and take the long way home.
+          </p>
         </div>
       </div>
     </section>
   );
-};
-
-export default AboutG1X;
+}

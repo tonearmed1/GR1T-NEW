@@ -1,173 +1,179 @@
 "use client";
-import React, { useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, useInView } from "framer-motion";
-import { useLanguage } from "@/context/LanguageContext";
 
-const BikesSection = () => {
-  const { t } = useLanguage();
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(sectionRef, { once: false, amount: 0.2 });
+import React, { useState } from "react";
+import Image from "next/image";
+
+type BikeKey = "street" | "scrambler" | "raider";
+type FeatureKey = "battery" | "display" | "belt" | "storage" | "cameras" | "suspension";
+
+interface Hotspot {
+  top: string;
+  left: string;
+  feature: FeatureKey;
+}
+
+interface BikeData {
+  img: string;
+  alt: string;
+  hotspots: Hotspot[];
+}
+
+interface FeatureData {
+  title: string;
+  desc: string;
+  tags?: string[];
+}
+
+const bikes: Record<BikeKey, BikeData> = {
+  street: {
+    img: "/grit-g1/hero.webp",
+    alt: "G1S Street",
+    hotspots: [
+      { top: "60%", left: "45%", feature: "battery" },
+      { top: "35%", left: "65%", feature: "display" },
+      { top: "75%", left: "40%", feature: "belt" },
+    ],
+  },
+  scrambler: {
+    img: "/grit-g1x/hero.webp",
+    alt: "G1X Scrambler",
+    hotspots: [
+      { top: "60%", left: "45%", feature: "battery" },
+      { top: "35%", left: "30%", feature: "display" },
+      { top: "45%", left: "80%", feature: "storage" },
+    ],
+  },
+  raider: {
+    img: "/grit-g1/hero.webp",
+    alt: "G1XR Raider",
+    hotspots: [
+      { top: "60%", left: "45%", feature: "battery" },
+      { top: "40%", left: "75%", feature: "suspension" },
+      { top: "25%", left: "65%", feature: "cameras" },
+    ],
+  },
+};
+
+const features: Record<FeatureKey, FeatureData> = {
+  battery: {
+    title: "Dual removable batteries (6 kWh capacity)",
+    desc: "Our signature dual-removable battery architecture provides unmatched flexibility for urban charging and extended range.",
+    tags: ["Engineering", "Performance"],
+  },
+  display: {
+    title: "Connected Cockpit (Apple CarPlay & Android Auto)",
+    desc: "Full integration with your ecosystem. The G1 series cockpit features an ultra-bright display with native smartphone mirroring.",
+    tags: ["Technology", "Connectivity"],
+  },
+  belt: {
+    title: "Belt drive",
+    desc: "Maintenance-free carbon belt drive for a silent, smooth, and clean riding experience. No oil, no chain adjustments.",
+    tags: ["Engineering"],
+  },
+  storage: {
+    title: "9L under-seat storage",
+    desc: "Smart utility built-in. Safely store your charger, tools, or daily essentials in the secure weather-protected compartment.",
+    tags: ["Utility"],
+  },
+  cameras: {
+    title: "Integrated cameras",
+    desc: "Front, rear, and rider-facing HD cameras provide security recording and assisted riding features natively.",
+    tags: ["Safety", "Technology"],
+  },
+  suspension: {
+    title: "Horizontal suspension",
+    desc: "Racing-inspired horizontal rear shock link optimizes space and provides superior damping characteristics for all terrains.",
+    tags: ["Engineering", "Performance"],
+  },
+};
+
+const BIKE_TABS: { key: BikeKey; label: string }[] = [
+  { key: "street", label: "G1S Street" },
+  { key: "scrambler", label: "G1X Scrambler" },
+  { key: "raider", label: "G1XR Raider" },
+];
+
+export default function BikesSection() {
+  const [activeBike, setActiveBike] = useState<BikeKey>("street");
+  const [activeFeature, setActiveFeature] = useState<FeatureKey>("battery");
+
+  const bike = bikes[activeBike];
+  const feat = features[activeFeature];
+
+  const handleBikeSwitch = (key: BikeKey) => {
+    setActiveBike(key);
+    setActiveFeature(bikes[key].hotspots[0].feature);
+  };
 
   return (
-    <section ref={sectionRef} className="py-8  sm:py-12 md:pt-24 bg-white ">
-      <div className="mx-auto max-w-6xl lg:max-w-7xl px-4 md:px-0">
-        {/* Header */}
-        <motion.div
-          className="px-0 sm:px-2 flex flex-col sm:flex-row  items-center mb-8 sm:mb-12 text-center sm:text-left"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ opacity: { duration: 1.2 }, y: { duration: 0.8 } }}
-        >
-          <h2 className="text-4xl md:text-6xl xl:text-4xl sm:text-3xl text-black font-bold">{t("home.bikes.title")}</h2>
-        </motion.div>
-
-        {/* Models grid */}
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 items-stretch">
-          {/* GT1S */}
-          <div className="mb-8 md:mb-0 h-full">
-            <Link
-              href="/G1S"
-              className="pt-4 rounded-xl border border-gray-200 hover:border-orange-500 bg-gray-50 hover:bg-gray-100 block group cursor-pointer flex flex-col h-full md:min-h-[52rem]"
-              aria-label="View GR1T G1S details"
-            >
-              <motion.div
-                className="md:p-0 transition-colors duration-300 ease-out"
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-                transition={{
-                  opacity: { duration: 1.2, ease: "easeOut", delay: 0.12 },
-                  y: { duration: 0.8, ease: "easeOut", delay: 0.12 },
-                }}
-              >
-                <div className="flex items-center gap-3 px-3">
-                  <h3 className="text-3xl sm:text-5xl text-black font-bold leading-tight "> G1S Street</h3>
-                </div>
-
-                <p className="mt-2 text-lg sm:text-2xl text-gray-700 mb-5 px-3">{t("home.bikes.description1")}</p>
-
-                <span className="text-bold text-3xl text-black px-3">{t("home.bikes.g1s.startingPrice")}</span>
-                <br />
-                {/* <span className="text-bold text-3xl text-black px-3 line-through">
-                  {t("home.bikes.g1s.originalStartingPrice")}
-                </span> */}
-
-                {/* <div className="mt-3 flex items-center gap-2 text-3xl px-3">
-                  <span className=" py-1 font-normal text-black">
-                    <span className=" py-1 font-black text-orange-600 mr-2 ">{t("home.bikes.discountInline.prefix")}</span>
-                    {t("home.bikes.discountInline.suffix")}
-                  </span>
-                </div> */}
-              </motion.div>
-              <motion.div
-                className=" relative h-72 sm:h-96 md:h-[32rem]   overflow-hidden transition-all duration-300 ease-out  "
-                initial={{ opacity: 0, scale: 0.97, filter: "blur(8px)" }}
-                animate={
-                  inView ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.97, filter: "blur(8px)" }
-                }
-                transition={{
-                  opacity: { duration: 1.4, ease: "easeOut", delay: 0.18 },
-                  scale: { duration: 0.8, ease: "easeOut", delay: 0.18 },
-                  filter: { duration: 1.2, ease: "easeOut", delay: 0.18 },
-                }}
-              >
-                <Image
-                  src="/Home/bikes/G1S.png"
-                  alt="GR1T G1S"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-                  className="p-10 pb-0 object-contain transition-transform duration-300 ease-out group-hover:scale-[1.05] "
-                  priority
-                />
-              </motion.div>
+    <section className="py-32 bg-white px-5 md:px-20" id="explore">
+      <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row gap-12 items-start">
+        {/* Left: bike image + tabs */}
+        <div className="w-full md:w-2/3">
+          {/* Tabs */}
+          <div className="flex gap-2 mb-8 flex-wrap">
+            {BIKE_TABS.map((tab) => (
               <button
-                aria-label="Open GR1T G1S details in a new tab"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  window.open("/G1S", "_self");
-                }}
-                className="mt-auto w-full group inline-flex items-center justify-center rounded-b-xl gap-2 bg-black text-white px-4 sm:px-5 text-xl hover:bg-black/90 transition-colors h-[2.25rem] sm:h-[3rem] hover:cursor-pointer"
+                key={tab.key}
+                onClick={() => handleBikeSwitch(tab.key)}
+                className={`px-6 py-3 border text-sm font-medium tracking-wide transition-all rounded-sm ${
+                  activeBike === tab.key
+                    ? "bg-black text-white border-black"
+                    : "border-surface-container text-black hover:border-black"
+                }`}
               >
-                {t("common.explore")}
+                {tab.label}
               </button>
-            </Link>
+            ))}
           </div>
-          {/* GT1x */}
-
-          <div className="h-full">
-            <Link
-              href="/G1X"
-              className="pt-4 rounded-xl border border-gray-200 hover:border-orange-500 bg-gray-50 hover:bg-gray-100 block group cursor-pointer flex flex-col h-full md:min-h-[52rem]"
-              aria-label="View GR1T G1X details"
-            >
-              <motion.div
-                className="md:p-0 transition-colors duration-300 ease-out"
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-                transition={{
-                  opacity: { duration: 1.2, ease: "easeOut", delay: 0.22 },
-                  y: { duration: 0.8, ease: "easeOut", delay: 0.22 },
-                }}
-              >
-                <div className="flex items-center gap-3  px-3">
-                  <h3 className="text-3xl sm:text-5xl text-black font-bold leading-tight">G1X Scrambler</h3>
-                </div>
-                <p className="mt-2 text-lg sm:text-2xl text-gray-700 mb-4 px-3">{t("home.bikes.description2")}</p>
-                {/* Subtle promo pill */}
-                <span className="text-bold text-3xl text-black px-3">{t("home.bikes.g1x.startingPrice")}</span>
-                <br />
-                {/* <span className="text-bold text-3xl text-black px-3 line-through">
-                  {t("home.bikes.g1x.originalStartingPrice")}
-                </span> */}
-
-                {/* <div className="mt-3 flex items-center gap-2 text-3xl px-3">
-                  <span className=" py-1 font-normal text-black">
-                    <span className=" py-1 font-black text-orange-600 mr-2 ">{t("home.bikes.discountInline.prefix")}</span>
-                    {t("home.bikes.discountInline.suffix")}
-                  </span>
-                </div> */}
-              </motion.div>
-              <motion.div
-                className="relative h-72 sm:h-96 md:h-[32rem]  overflow-hidden transition-all duration-300 ease-out"
-                initial={{ opacity: 0, scale: 0.97, filter: "blur(8px)" }}
-                animate={
-                  inView ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.97, filter: "blur(8px)" }
-                }
-                transition={{
-                  opacity: { duration: 1.4, ease: "easeOut", delay: 0.28 },
-                  scale: { duration: 0.8, ease: "easeOut", delay: 0.28 },
-                  filter: { duration: 1.2, ease: "easeOut", delay: 0.28 },
-                }}
-              >
-                <Image
-                  src="/Home/bikes/G1X.png"
-                  alt="GR1T G1X"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-                  className="p-10 pb-0 object-contain transition-transform duration-300 ease-out group-hover:scale-[1.05]"
-                  priority
-                />
-              </motion.div>
+          {/* Image container */}
+          <div className="relative bg-surface-alt rounded-2xl overflow-hidden aspect-[4/3] md:h-[600px] flex items-center justify-center">
+            <Image
+              src={bike.img}
+              alt={bike.alt}
+              fill
+              className="object-contain p-8 transition-opacity duration-500"
+            />
+            {/* Hotspots */}
+            {bike.hotspots.map((hs, i) => (
               <button
-                aria-label="Open GR1T G1S details in a new tab"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  window.open("/G1X", "_blank");
-                }}
-                className="mt-auto w-full group inline-flex items-center justify-center rounded-b-xl gap-2 bg-black text-white px-4 sm:px-5 text-xl hover:bg-black/90 transition-colors h-[2.25rem] sm:h-[3rem] hover:cursor-pointer"
-              >
-                {t("common.explore")}
-              </button>
-            </Link>
+                key={i}
+                onClick={() => setActiveFeature(hs.feature)}
+                style={{ top: hs.top, left: hs.left }}
+                className="absolute w-3.5 h-3.5 rounded-full bg-grit-orange cursor-pointer z-20 transition-transform hover:scale-125 shadow-[0_0_0_4px_rgba(245,116,35,0.2)] hover:shadow-[0_0_0_8px_rgba(245,116,35,0.3)]"
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Right: feature panel */}
+        <div className="w-full md:w-1/3 flex flex-col gap-6">
+          <div className="p-10 border border-surface-container bg-surface-alt rounded-2xl transition-all duration-300">
+            <div className="aspect-video overflow-hidden mb-8 rounded-lg bg-surface-dim relative">
+              <Image
+                src={bike.img}
+                alt={feat.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+            <h3 className="text-2xl font-semibold mb-4">{feat.title}</h3>
+            <p className="text-on-surface-variant leading-relaxed">{feat.desc}</p>
+            {feat.tags && feat.tags.length > 0 && (
+              <div className="mt-8 pt-8 border-t border-surface-container flex flex-wrap gap-3">
+                {feat.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-white text-on-surface-variant text-xs font-bold uppercase tracking-wider rounded border border-surface-container"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default BikesSection;
+}

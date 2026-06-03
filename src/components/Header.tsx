@@ -40,10 +40,12 @@ const Header = () => {
   // - Reserve is rendered separately as the primary CTA button (right side).
   const navigationLinks = [
     {
-      label: t("nav.bikes"),
+      label: t("nav.g1series"),
+      href: "/motorcycles/g1",
       children: [
-        { label: t("founders.bikes.g1s.title"), href: "/G1S" },
-        { label: t("founders.bikes.g1x.title"), href: "/G1X" },
+        { label: "G1S Street", href: "/G1S" },
+        { label: "G1X Scrambler", href: "/G1X" },
+        { label: "G1XR Raider", href: "/G1XR" },
       ],
     },
     {

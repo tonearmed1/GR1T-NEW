@@ -1,34 +1,60 @@
 "use client";
-import React from "react";
-import Image from "next/image";
-import { useLanguage } from "@/context/LanguageContext";
 
-const G1SHero = () => {
-  const { t } = useLanguage();
+import Image from "next/image";
+import Link from "next/link";
+
+const HIGHLIGHTS = [
+  { label: "Power", value: "11 kW" },
+  { label: "Top Speed", value: "130 km/h" },
+  { label: "Range", value: "150 km" },
+  { label: "Weight", value: "127 kg" },
+  { label: "Payload", value: "190 kg" },
+  { label: "Battery", value: "Dual" },
+];
+
+export default function G1SHero() {
   return (
-    <section className="relative h-[55vh] min-h-[420px] sm:h-[60vh] w-full overflow-hidden mt-16">
-      {/* Hero Image Background */}
-      <div className="absolute inset-0 -z-10">
-        <Image src="/grit-g1/hero.jpg" alt="Contact Hero" fill className="object-cover" sizes="100vw" priority />
-        {/* Dark overlay for better text visibility */}
-        <div className="absolute inset-0 bg-black opacity-40"></div>
+    <header className="relative w-full h-screen overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/grit-g1/hero.webp"
+          alt="GR1T G1S Street Hero"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
       </div>
 
-      <div className="absolute bottom-1/8 z-10 w-full flex justify-center">
-        <div className="max-w-7xl w-full px-4 md:px-0 mx-auto">
-          <div className="mb-4">
-            <h2 className="text-white font-britti text-3xl sm:text-5xl font-semibold">{t("g1s.hero.title")}</h2>
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-between text-white mt-2 border-t border-white pt-4 sm:pt-6 w-full">
-            <div>
-              <p className="text-2xl sm:text-3xl text-white mb-2">{t("g1s.hero.subtitle")}</p>
-            </div>
+      {/* Content */}
+      <div className="relative z-10 h-full flex flex-col justify-end px-5 md:px-20 pb-16 max-w-[1440px] mx-auto">
+        <div className="max-w-4xl space-y-4">
+          <h1 className="font-britti font-bold text-[40px] md:text-[72px] leading-none uppercase text-white">
+            G1S Street.
+          </h1>
+          <p className="text-2xl font-semibold text-white">Designed for the city. Built for everywhere else.</p>
+          <p className="text-2xl font-semibold text-white/80">€7,000</p>
+          <div className="flex flex-wrap gap-4 pt-4">
+            <Link href="/checkout" className="btn btn-secondary-light">
+              Reserve Yours
+            </Link>
+            <button className="btn btn-secondary-light">
+              Download Specifications
+            </button>
           </div>
         </div>
-      </div>
-    </section>
-  );
-};
 
-export default G1SHero;
+        {/* Key highlights row */}
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-6 mt-12 border-t border-white/20 pt-8">
+          {HIGHLIGHTS.map((h) => (
+            <div key={h.label} className="text-white">
+              <p className="text-xs uppercase text-white/60">{h.label}</p>
+              <p className="text-2xl font-semibold mt-1">{h.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </header>
+  );
+}

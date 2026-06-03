@@ -3,14 +3,14 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
-const G1SGallery = () => {
+const G1XRGallery = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const inView = useInView(sectionRef, { once: false, amount: 0.2 });
 
   return (
     <section ref={sectionRef} className="py-6 md:py-16 px-10 md:px-0 bg-white">
       <div className="max-w-7xl mx-auto">
-        {/* Grid layout matching the reference */}
+        {/* Grid layout */}
         <div className="grid grid-cols-1 md:gap-6 gap-2">
           {/* Middle row: 1/3 + 2/3 widths, equal height */}
           <div className="grid grid-cols-3 gap-2 md:gap-6 h-[18rem] md:h-[24rem] lg:h-[28rem]">
@@ -26,8 +26,8 @@ const G1SGallery = () => {
             >
               <div className="relative w-full h-full">
                 <Image
-                  src="/Home/gallery2/2.png"
-                  alt="Gallery close-up"
+                  src="/grit-g1xr/gallery-1.webp"
+                  alt="G1XR Raider gallery close-up"
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover"
@@ -46,8 +46,8 @@ const G1SGallery = () => {
             >
               <div className="relative w-full h-full">
                 <Image
-                  src="/Home/gallery2/3.png"
-                  alt="Top view"
+                  src="/grit-g1xr/gallery-2.webp"
+                  alt="G1XR Raider top view"
                   fill
                   sizes="(max-width: 768px) 100vw, 66vw"
                   className="object-cover"
@@ -68,8 +68,8 @@ const G1SGallery = () => {
             >
               <div className="relative w-full h-full">
                 <Image
-                  src="/Home/gallery2/7.webp"
-                  alt="Top view"
+                  src="/grit-g1xr/gallery-3.webp"
+                  alt="G1XR Raider wide view"
                   fill
                   sizes="(max-width: 768px) 100vw, 66vw"
                   className="object-cover"
@@ -88,8 +88,8 @@ const G1SGallery = () => {
             >
               <div className="relative w-full h-full">
                 <Image
-                  src="/Home/gallery2/6.png"
-                  alt="Gallery close-up"
+                  src="/grit-g1xr/gallery-4.webp"
+                  alt="G1XR Raider detail"
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover"
@@ -112,10 +112,10 @@ const G1SGallery = () => {
             >
               <div className="relative w-full aspect-[2/3] md:aspect-[2/3]">
                 <Image
-                  src="/Home/gallery2/4.png"
-                  alt="Portrait"
+                  src="/grit-g1xr/gallery-5.webp"
+                  alt="G1XR Raider portrait"
                   fill
-                  sizes="(max-width: 768px) 100vw, 35vw "
+                  sizes="(max-width: 768px) 100vw, 35vw"
                   className="object-cover object-center rounded-b-2xl"
                 />
               </div>
@@ -132,8 +132,8 @@ const G1SGallery = () => {
             >
               <div className="relative w-full aspect-[16/10] md:aspect-[16/8] max-h-[80%] md:max-h-[95%]">
                 <Image
-                  src="/Home/gallery2/5.png"
-                  alt="Wide shot"
+                  src="/grit-g1xr/gallery-6.webp"
+                  alt="G1XR Raider wide shot"
                   fill
                   sizes="(max-width: 768px) 100vw, 55vw"
                   className="object-cover rounded-b-2xl"
@@ -147,4 +147,4 @@ const G1SGallery = () => {
   );
 };
 
-export default G1SGallery;
+export default G1XRGallery;

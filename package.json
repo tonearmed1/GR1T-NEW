@@ -16,6 +16,7 @@
     "@vercel/analytics": "^1.5.0",
     "framer-motion": "^12.23.22",
     "googleapis": "^162.0.0",
+    "lightningcss": "^1.32.0",
     "next": "15.5.9",
     "nodemailer": "^7.0.9",
     "react": "19.1.0",
