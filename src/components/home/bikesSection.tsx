@@ -26,7 +26,7 @@ interface FeatureData {
 
 const bikes: Record<BikeKey, BikeData> = {
   street: {
-    img: "/grit-g1/hero.webp",
+    img: "/grit-g1/hero.jpg",
     alt: "G1S Street",
     hotspots: [
       { top: "60%", left: "45%", feature: "battery" },
@@ -35,7 +35,7 @@ const bikes: Record<BikeKey, BikeData> = {
     ],
   },
   scrambler: {
-    img: "/grit-g1x/hero.webp",
+    img: "/grit-g1x/hero.jpg",
     alt: "G1X Scrambler",
     hotspots: [
       { top: "60%", left: "45%", feature: "battery" },
@@ -44,7 +44,7 @@ const bikes: Record<BikeKey, BikeData> = {
     ],
   },
   raider: {
-    img: "/grit-g1/hero.webp",
+    img: "/grit-g1/hero.jpg",
     alt: "G1XR Raider",
     hotspots: [
       { top: "60%", left: "45%", feature: "battery" },

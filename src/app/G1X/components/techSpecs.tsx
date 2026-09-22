@@ -25,7 +25,7 @@ export default function TechSpecs() {
           {/* Large image */}
           <div className="md:col-span-7 relative aspect-[16/10]">
             <Image
-              src="/grit-g1x/hero.webp"
+              src="/grit-g1x/hero.jpg"
               alt="Technical Close-up"
               fill
               className="object-cover border border-outline-variant/30"

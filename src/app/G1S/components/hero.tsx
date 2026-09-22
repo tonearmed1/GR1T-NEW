@@ -18,7 +18,7 @@ export default function G1SHero() {
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/grit-g1/hero.webp"
+          src="/grit-g1/hero.jpg"
           alt="GR1T G1S Street Hero"
           fill
           className="object-cover"
