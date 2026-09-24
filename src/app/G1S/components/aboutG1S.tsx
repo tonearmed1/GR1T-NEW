@@ -1,60 +1,61 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
-import heroImg from "../../../../public/grit-g1/01_g1s.png";
-import Link from "next/link";
-import { useLanguage } from "@/context/LanguageContext";
 
-const AboutG1S = () => {
-  const { t } = useLanguage();
+const FEATURES = [
+  {
+    title: "127 kg Lightweight Chassis",
+    desc: "Experience urban confidence like never before. The ultra-lightweight trellis frame delivers precision handling that makes filtering through tight city traffic feel intuitive and effortless.",
+    img: "/grit-g1/01_g1s.png",
+    imgLeft: true,
+  },
+  {
+    title: "Dual Removable Batteries",
+    desc: "True independence from public infrastructure. Carry your power with you and charge at any standard outlet—at home, at work, or at your favorite cafe.",
+    img: "/grit-g1/02_g1s.png",
+    imgLeft: false,
+  },
+  {
+    title: "Connected Cockpit",
+    desc: "Your digital life, seamlessly integrated. With full Apple CarPlay and Android Auto support, your navigation, music, and communications are always within reach on a stunning high-def interface.",
+    img: "/grit-g1/01_g1s.png",
+    imgLeft: true,
+  },
+];
+
+export default function AboutG1S() {
   return (
-    <section className="bg-white py-12 sm:py-16">
-      <div className="container mx-auto px-4 md:px-0 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Text Column */}
-          <div className="lg:col-span-6">
-            <h1 className="text-black font-bold leading-tight text-2xl sm:text-3xl lg:text-4xl">{t("g1s.about.title")}</h1>
-
-            <p className="mt-6 text-gray-800 max-w-xl text-lg">{t("g1s.about.description")}</p>
-
-            <div className="mt-6">
-              <Link href="/checkout?model=G1S" className="inline-flex items-center rounded-full bg-black text-white px-5 py-3">
-                <span className="mr-3">{t("common.reserveNow")}</span>
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-4 w-4"
-                    aria-hidden="true"
-                  >
-                    <path d="M13.172 12l-4.95 4.95 1.414 1.414L16 12l-6.364-6.364-1.414 1.414z" />
-                  </svg>
-                </span>
-              </Link>
+    <section className="py-40 bg-white">
+      <div className="px-5 md:px-20 max-w-[1440px] mx-auto">
+        <h2 className="font-britti font-bold text-4xl md:text-5xl mb-24">Why Riders Choose The G1S</h2>
+        <div className="space-y-40">
+          {FEATURES.map((feat) => (
+            <div key={feat.title} className="grid md:grid-cols-12 gap-6 items-center">
+              {feat.imgLeft ? (
+                <>
+                  <div className="md:col-span-7 aspect-[16/9] overflow-hidden relative">
+                    <Image src={feat.img} alt={feat.title} fill className="object-cover" />
+                  </div>
+                  <div className="md:col-span-4 md:col-start-9 space-y-6">
+                    <h3 className="font-britti font-bold text-4xl md:text-5xl">{feat.title}</h3>
+                    <p className="text-lg text-on-surface-variant">{feat.desc}</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="md:col-span-4 space-y-6 order-2 md:order-1">
+                    <h3 className="font-britti font-bold text-4xl md:text-5xl">{feat.title}</h3>
+                    <p className="text-lg text-on-surface-variant">{feat.desc}</p>
+                  </div>
+                  <div className="md:col-span-7 md:col-start-6 aspect-[16/9] overflow-hidden order-1 md:order-2 relative">
+                    <Image src={feat.img} alt={feat.title} fill className="object-cover" />
+                  </div>
+                </>
+              )}
             </div>
-          </div>
-
-          {/* Image Column */}
-          <div className="lg:col-span-6">
-            <div className="relative w-full h-72 sm:h-96 lg:h-[520px] rounded-xl overflow-hidden">
-              <Image
-                src={heroImg}
-                alt="GR1T side panel close-up"
-                fill
-                className="object-cover"
-                priority
-                placeholder="blur"
-                quality={30}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw"
-              />
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default AboutG1S;
+}
