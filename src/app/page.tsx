@@ -1,28 +1,30 @@
 "use client";
 import Hero from "@/components/home/hero";
-import MediaStrip from "@/components/home/MediaStrip";
-import BikesSection from "@/components/home/bikesSection";
-import TechFeatures from "@/components/home/TechFeatures";
-import HeritageSection from "@/components/home/HeritageSection";
-import CTATwoSection from "@/components/home/cta2";
-import GalleryTwoSection from "@/components/reusable/gallery2";
-import Insta from "@/components/home/insta";
-import ContactEICMA from "@/components/home/ContactEICMA";
-import NewsletterSignup from "@/components/home/NewsletterSignup";
+import DifferentJourneys from "@/components/home/DifferentJourneys";
+import LifestyleSection from "@/components/home/LifestyleSection";
+import UniquelyYours from "@/components/home/UniquelyYours";
+import RealLifeSection from "@/components/home/RealLifeSection";
+import MotorValleySection from "@/components/home/MotorValleySection";
+import PressStrip from "@/components/home/PressStrip";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+import SpecsSection from "@/components/home/SpecsSection";
+import FAQPreview from "@/components/home/FAQPreview";
+import FinalCTASection from "@/components/home/FinalCTASection";
 
 export default function Home() {
   return (
     <div className="w-full">
       <Hero />
-      <MediaStrip />
-      <BikesSection />
-      <TechFeatures />
-      <HeritageSection />
-      <CTATwoSection />
-      <GalleryTwoSection />
-      <Insta />
-      <ContactEICMA />
-      <NewsletterSignup />
+      <DifferentJourneys />
+      <LifestyleSection />
+      <UniquelyYours />
+      <RealLifeSection />
+      <MotorValleySection />
+      <PressStrip />
+      <TestimonialsSection />
+      <SpecsSection />
+      <FAQPreview />
+      <FinalCTASection />
     </div>
   );
 }

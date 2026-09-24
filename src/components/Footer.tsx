@@ -5,32 +5,14 @@ import SocialIcon from "./SocialIcon";
 import { useLanguage } from "@/context/LanguageContext";
 import { useCallback, useState } from "react";
 
-import { COUNTRIES } from "@/constants/country";
-// import { SingleValue } from "react-select";
-
 const Footer = () => {
   const { t, language } = useLanguage();
-  const [showSelector, setShowSelector] = useState(false);
-
-  const openSelector = useCallback(() => setShowSelector(true), []);
-  const closeSelector = useCallback(() => setShowSelector(false), []);
-  const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [country, setCountry] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
-
-  const filteredCountries = COUNTRIES.filter((ctr) => (country ? ctr.toLowerCase().includes(country.toLowerCase()) : true));
   const [message, setMessage] = useState<string>("");
 
-  // const onSignupClick = useCallback(() => setExpanded(true), []);
   const onEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value), []);
-  const onNameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value), []);
-  const onCountryChange = useCallback((ctry: string) => {
-    setCountry(ctry);
-    setIsOpen(false);
-  }, []);
 
   const onSubmit = useCallback(async () => {
     if (loading) return;
@@ -50,13 +32,13 @@ const Footer = () => {
       const res = await fetch("/api/mailchimp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmed, name: name.trim(), country: country }),
+        body: JSON.stringify({ email: trimmed }),
       });
 
       let data: unknown = null;
       try {
         data = await res.json();
-      } catch (_) {
+      } catch {
         // Fallback to text when response isn't JSON (e.g., 404 HTML)
         const text = await res.text();
         data = { error: text };
@@ -74,7 +56,7 @@ const Footer = () => {
 
       // Optionally collapse after success
       // setExpanded(false);
-    } catch (err) {
+    } catch {
       setStatus("error");
       setMessage(t("footer.newsletter.networkError"));
     } finally {
@@ -167,15 +149,11 @@ const Footer = () => {
           <div className="w-full h-px bg-white my-8"></div>
         </div>
 
-        {/* Footer columns — 3 link cols + contact.
-            Mobile: 1-up. sm: 2-up grid. md/lg: 4 equal cols (one each, contact addresses stacked).
-            xl (widescreen): switch to a 12-col grid so the contact section can take col-span-6,
-            making room for addresses to sit side-by-side. */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-12 gap-x-6 gap-y-8 mb-12">
-          {/* Navigation Link Columns — at xl, each takes 2/12 (~16%), three of them = 6/12 */}
+        {/* Footer columns — 3 link cols + 3 address cols, 6 across on desktop. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-x-6 gap-y-8 mb-12">
           {footerLinks.map((column, index) => (
-            <div key={index} className="xl:col-span-2">
-              <h3 className="font-medium mb-4 text-white">{column.title}</h3>
+            <div key={index}>
+              <h3 className="text-grit-orange text-xs font-bold uppercase tracking-[0.1em] mb-4">{column.title}</h3>
               <ul className="space-y-2 text-sm text-white">
                 {column.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
@@ -188,199 +166,92 @@ const Footer = () => {
             </div>
           ))}
 
-          {/* Newsletter Signup */}
-          {/* <div>
-            <div className="bg-white rounded-[21] py-4 px-3 max-w-md -mt-4">
-              <h3 className="font-bold mb-4 text-black">{t("footer.newsletter.title")}</h3>
-              <p className="text-sm text-black mb-4">{t("footer.newsletter.description")}</p>
-              <div className="flex justify-end">
-                <button
-                  // href="/newsletter"
-                  onClick={openSelector}
-                  className="inline-flex items-center bg-black text-white rounded-full px-3 py-1 text-sm font-medium border border-gray-300"
-                >
-                  {t("footer.newsletter.joinNow")}
-                  <svg className="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M5 12H19M19 12L12 5M19 12L12 19"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div> */}
-
-          {/* Contact Info — equal to link cols at md/lg with addresses stacked,
-              wider (6/12) at xl with addresses side-by-side. */}
-          <div className="xl:col-span-6">
-            <h3 className="font-medium mb-4">{t("contact.title")}</h3>
-            <div className="space-y-4 xl:space-y-0 xl:grid xl:grid-cols-3 xl:gap-4">
-              <address className="not-italic text-sm text-white space-y-1">
-                <p>GR1T Motorcycles GmbH</p>
-                <p>Piazza Gae Aulenti 1, Torre B</p>
-                <p>Milano, 20154</p>
-                <p>Italy</p>
-                <p className="mt-2">Tel +39 (0) 297130335</p>
-              </address>
-              <address className="not-italic text-sm text-white space-y-1">
-                <p>GR1T Motorcycles GmbH</p>
-                <p>Goethestrasse 42</p>
-                <p>16025 Berlin</p>
-                <p>Germany</p>
-                <p className="mt-2">Tel +49 (0) 30 300 139 603</p>
-              </address>
-              <address className="not-italic text-sm text-white space-y-1">
-                <p>GR1T Motorcycles (Holdings) Ltd</p>
-                <p>Archbishop Makarios III, 133</p>
-                <p>Limassol, 3085</p>
-                <p>Cyprus</p>
-              </address>
-            </div>
-            {/* Email */}
-            <div className="text-sm text-gray-400 mt-4">
-              <Link href="mailto:grit@gritmotorcycles.com" className="text-white hover:underline transition-all">
+          <div>
+            <h3 className="text-grit-orange text-xs font-bold uppercase tracking-[0.1em] mb-4">Italy</h3>
+            <address className="not-italic text-sm text-white space-y-1">
+              <p>GR1T Motorcycles GmbH</p>
+              <p>Piazza Gae Aulenti 1, Torre B</p>
+              <p>20154 Milano</p>
+              <p>+39 (0) 297 130 335</p>
+            </address>
+          </div>
+          <div>
+            <h3 className="text-grit-orange text-xs font-bold uppercase tracking-[0.1em] mb-4">Germany</h3>
+            <address className="not-italic text-sm text-white space-y-1">
+              <p>GR1T Motorcycles GmbH</p>
+              <p>Goethestrasse 42</p>
+              <p>16025 Berlin</p>
+              <p>+49 (0) 30 300 139 603</p>
+            </address>
+          </div>
+          <div>
+            <h3 className="text-grit-orange text-xs font-bold uppercase tracking-[0.1em] mb-4">Cyprus</h3>
+            <address className="not-italic text-sm text-white space-y-1">
+              <p>GR1T Motorcycles (Holdings) Ltd</p>
+              <p>Archbishop Makarios III, 133</p>
+              <p>Limassol, 3085</p>
+              <Link href="mailto:grit@gritmotorcycles.com" className="text-white hover:underline transition-all block mt-2">
                 grit(at)gritmotorcycles.com
+              </Link>
+            </address>
+          </div>
+        </div>
+      </div>
+      {/* Copyright, legal links, and inline newsletter signup */}
+      <div className="border-t border-gray-800 pt-8 mt-4">
+        <div className="mx-auto max-w-6xl lg:max-w-7xl px-4 md:px-0 flex flex-col md:flex-row justify-between items-end gap-8">
+          <div className="text-sm text-gray-400">
+            <p>
+              © {new Date().getFullYear()} GR1T. {t("footer.rights")}
+            </p>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 mt-4">
+              <Link href="/legal/privacy-policy" className="hover:text-white">
+                {t("common.privacyPolicy")}
+              </Link>
+              <Link href="/legal/terms-of-use" className="hover:text-white">
+                {t("common.termsOfUse")}
+              </Link>
+              <Link href="/legal/cookie-policy" className="hover:text-white">
+                Cookie Policy
               </Link>
             </div>
           </div>
-        </div>
-      </div>
-      {/* Copyright and Legal */}
-      <div className="border-t border-gray-800 pt-8 mt-12 text-sm text-gray-400">
-        <div className="mx-auto max-w-6xl lg:max-w-7xl px-4 md:px-0 flex flex-col md:flex-row justify-between items-center">
-          <p>
-            © {new Date().getFullYear()} GR1T. {t("footer.rights")}
-          </p>
-          {/* Bottom strip — purely site-wide legal/compliance links.
-              Warranty + Reservation Terms moved up into the "Bikes" column. */}
-          <div className="flex flex-wrap gap-x-6 gap-y-2 mt-4 md:mt-0">
-            <Link href="/legal/privacy-policy" className="hover:text-white">
-              {t("common.privacyPolicy")}
-            </Link>
-            <Link href="/legal/terms-of-use" className="hover:text-white">
-              {t("common.termsOfUse")}
-            </Link>
-            <Link href="/legal/cookie-policy" className="hover:text-white">
-              {language === "it" ? "Cookie Policy" : "Cookie Policy"}
-            </Link>
-          </div>
-        </div>
-      </div>
-      {showSelector && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/60" onClick={closeSelector} />
-          <div
-            role="dialog"
-            aria-modal="true"
-            className="relative mx-4 w-full max-w-lg md:max-w-xl  rounded-2xl bg-white shadow-xl p-5 md:p-8 lg:p-10 max-h-[85vh] overflow-y-auto overscroll-contain"
-          >
-            <button
-              aria-label="Close"
-              onClick={closeSelector}
-              className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </button>
-            <h4 className="text-xl md:text-2xl lg:text-3xl font-semibold text-black text-center">{t("cta.modal.title")}</h4>
-            <p className="mt-2 text-sm md:text-base lg:text-lg text-gray-600 text-center">{t("cta.modal.subtitle")}</p>
-            <div className="w-full max-w-none mx-auto">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  onSubmit();
-                }}
-                className="space-y-3 transition-all duration-300 w-full mx-auto"
-              >
-                <input
-                  type="text"
-                  value={name}
-                  onChange={onNameChange}
-                  placeholder={t("cta.form.namePlaceholder")}
-                  className="border border-gray-300 w-full bg-white rounded-full shadow-sm px-4 py-2.5 md:py-3 text-black outline-none placeholder:text-zinc-500"
-                  aria-label="Name"
-                />
-                <div className="relative w-full mx-auto">
-                  <input
-                    type="text"
-                    value={country}
-                    onChange={(e) => {
-                      setCountry(e.target.value);
-                      setIsOpen(true);
-                    }}
-                    onFocus={() => setIsOpen(true)}
-                    placeholder={t("cta.form.countryPlaceholder")}
-                    className={` w-full bg-white  shadow-sm px-4 py-2.5 md:py-3 text-black outline-none placeholder:text-zinc-500 ${
-                      isOpen ? "rounded-t-xl" : "rounded-full border border-gray-300"
-                    }`}
-                  />
-                  {isOpen && (
-                    <ul
-                      className={`absolute z-10 min-w-full bg-white  max-h-20 overflow-y-auto shadow-lg ${
-                        isOpen ? "rounded-b-xl" : "rounded-md "
-                      }`}
-                    >
-                      {filteredCountries.length > 0 ? (
-                        filteredCountries.map((country) => (
-                          <li
-                            key={country}
-                            onClick={() => onCountryChange(country)}
-                            className="p-2 hover:bg-blue-100 cursor-pointer text-black"
-                          >
-                            {country}
-                          </li>
-                        ))
-                      ) : (
-                        <li className="p-2 text-gray-400">{t("cta.form.noResults")}</li>
-                      )}
-                    </ul>
-                  )}
-                </div>
 
-                {/* <input type="text" value={country} onChange={onCountryChange} placeholder="Country" aria-label="Country" /> */}
-                <input
-                  type="email"
-                  value={email}
-                  onChange={onEmailChange}
-                  placeholder={t("cta.form.emailPlaceholder")}
-                  className="hidden"
-                  aria-label="Email address"
-                  required
-                />
-                <div className="border border-gray-300 flex items-center justify-center bg-white rounded-full shadow-sm overflow-hidden w-full mx-auto">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={onEmailChange}
-                    placeholder={t("cta.form.emailPlaceholder")}
-                    className="flex-1 px-4 py-2.5 md:py-3 text-black outline-none bg-transparent placeholder:text-zinc-500"
-                    aria-label="Email address"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="px-5 md:px-6 py-2.5 md:py-3 bg-orange-500 text-white font-bold hover:cursor-pointer hover:bg-orange-600 disabled:opacity-60 disabled:cursor-not-allowed"
-                    aria-live="polite"
-                  >
-                    {loading ? t("cta.form.submitting") : t("cta.form.submit")}
-                  </button>
-                </div>
-              </form>
-              {status !== "idle" && (
-                <p className={`mt-2 text-lg text-center ${status === "success" ? "text-green-600" : "text-red-500"}`}>
-                  {message}
-                </p>
-              )}
-            </div>
+          <div className="w-full md:w-auto">
+            <h3 className="font-medium mb-3 text-white">Stay up to date.</h3>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                onSubmit();
+              }}
+              className="flex items-center bg-transparent border border-white/30 rounded-full overflow-hidden w-full md:w-80"
+            >
+              <input
+                type="email"
+                value={email}
+                onChange={onEmailChange}
+                placeholder="Email address"
+                className="flex-1 bg-transparent px-4 py-2.5 text-white outline-none placeholder:text-white/50 text-sm"
+                aria-label="Email address"
+                required
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className="m-1 inline-flex items-center gap-2 rounded-full bg-white text-black px-4 py-1.5 text-sm font-semibold hover:bg-grit-orange hover:text-white transition-colors disabled:opacity-60"
+              >
+                {loading ? "..." : "Join"}
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M2.5 8H13.5M13.5 8L9.5 4M13.5 8L9.5 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </form>
+            {status !== "idle" && (
+              <p className={`mt-2 text-xs ${status === "success" ? "text-emerald-400" : "text-red-400"}`}>{message}</p>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </footer>
   );
 };

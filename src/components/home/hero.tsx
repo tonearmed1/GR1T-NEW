@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import Image from "next/image";
+import PillButton from "@/components/PillButton";
 
 export default function Hero() {
   return (
@@ -21,15 +22,19 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/5" />
 
       <div className="relative h-full max-w-[1440px] mx-auto px-5 md:px-20 flex flex-col justify-end pb-16 md:pb-20 gap-6">
-        <h1 className="font-britti font-bold text-4xl md:text-6xl lg:text-7xl leading-tight tracking-tight max-w-3xl">
-          The G1 Series. Different journeys, same DNA.
-        </h1>
-        <p className="text-lg text-white/85 max-w-2xl leading-relaxed">
-          Designed and engineered in Italy&apos;s Motor Valley. Three motorcycles built on the same platform, each created for a different way of riding.
+        <Image src="/LOGO_big_WHITE.svg" alt="GR1T Motorcycles" width={220} height={44} className="h-10 md:h-11 w-auto" priority />
+        <p className="font-britti font-bold text-2xl md:text-3xl tracking-[0.15em] uppercase text-white/85 -mt-3">
+          G1 Series
         </p>
-        <Link href="/reserve" className="btn btn-accent w-fit">
-          Reserve Now
-        </Link>
+        <p className="text-lg text-white/70 max-w-md">Urban. Refined. Everyday freedom.</p>
+        <div className="flex gap-3 flex-wrap">
+          <PillButton href="#models" variant="white">
+            Explore
+          </PillButton>
+          <PillButton href="/reserve" variant="orange">
+            Reserve
+          </PillButton>
+        </div>
       </div>
     </section>
   );
